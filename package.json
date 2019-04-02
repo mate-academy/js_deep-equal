@@ -1,7 +1,7 @@
 {
-  "name": "js-task-boilerplate",
+  "name": "deep-equal",
   "version": "1.0.0",
-  "description": "js task boilerplate",
+  "description": "Deep equal implementation",
   "main": "src/deepEqual.js",
   "scripts": {
     "test": "jest",
