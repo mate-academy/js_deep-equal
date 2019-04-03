@@ -3,11 +3,27 @@
 const deepEqual = require('./deepEqual');
 
 const testObj = { name: 'Misha', order: { price: 20 } };
-const testObjPropertiesInDifferentOrder = { order: { price: 20 }, name: 'Misha' };
-const testObjExtraNullProperty = { name: 'Misha', order: { price: 20 }, extraField: null };
-const testObjChangedProperty = { order: { price: 20 }, name: 'Petya' };
-const testObjChangedPropertyInNestedObj = { name: 'Misha', order: { price: 1000 } };
-const testObjExtraNullPropertyInNestedObj = { name: 'Misha', order: { price: 20, extraField: null } };
+const testObjPropertiesInDifferentOrder = {
+  order: { price: 20 },
+  name: 'Misha'
+};
+const testObjExtraNullProperty = {
+  name: 'Misha',
+  order: { price: 20 },
+  extraField: null
+};
+const testObjChangedProperty = {
+  order: { price: 20 },
+  name: 'Petya'
+};
+const testObjChangedPropertyInNestedObj = {
+  name: 'Misha',
+  order: { price: 1000 }
+};
+const testObjExtraNullPropertyInNestedObj = {
+  name: 'Misha',
+  order: { price: 20, extraField: null }
+};
 
 test('5 and 5 should be equal', () => {
   expect(deepEqual(5, 5)).toBe(true);
@@ -17,7 +33,8 @@ test('null and null should be equal', () => {
   expect(deepEqual(null, null)).toBe(true);
 });
 
-test(`Objects with same properties but in different order should be equal`,
+test(
+  `Objects with same properties but in different order should be equal`,
   () => {
     expect(deepEqual(testObj, testObjPropertiesInDifferentOrder))
       .toBe(true);
