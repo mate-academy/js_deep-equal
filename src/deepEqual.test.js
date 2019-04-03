@@ -2,12 +2,12 @@
 
 const deepEqual = require('./deepEqual');
 
-const a = { name: 'Misha', order: { price: 20 } };
-const b = { order: { price: 20 }, name: 'Misha' };
-const c = { name: 'Misha', order: { price: 20 }, extraField: null };
-const d = { order: { price: 20 }, name: 'Petya' };
-const e = { name: 'Misha', order: { price: 1000 } };
-const f = { name: 'Misha', order: { price: 20, extraField: null } };
+const testObj = { name: 'Misha', order: { price: 20 } };
+const testObjPropertiesInDifferentOrder = { order: { price: 20 }, name: 'Misha' };
+const testObjExtraNullProperty = { name: 'Misha', order: { price: 20 }, extraField: null };
+const testObjChangedProperty = { order: { price: 20 }, name: 'Petya' };
+const testObjChangedPropertyInNestedObj = { name: 'Misha', order: { price: 1000 } };
+const testObjExtraNullPropertyInNestedObj = { name: 'Misha', order: { price: 20, extraField: null } };
 
 test('5 and 5 should be equal', () => {
   expect(deepEqual(5, 5)).toBe(true);
@@ -17,13 +17,20 @@ test('null and null should be equal', () => {
   expect(deepEqual(null, null)).toBe(true);
 });
 
-test(`${a} and ${b} should be equal`, () => {
-  expect(deepEqual(a, b)).toBe(true);
-});
+test(`Objects with same properties but in different order should be equal`,
+  () => {
+    expect(deepEqual(testObj, testObjPropertiesInDifferentOrder))
+      .toBe(true);
+  });
 
-test('A and B should be equal', () => {
-  expect(deepEqual({ test: a }, { test: b })).toBe(true);
-});
+test(
+  'Nested Objects with same properties but in different order should be equal',
+  () => {
+    expect(deepEqual(
+      { test: testObj },
+      { test: testObjPropertiesInDifferentOrder }))
+      .toBe(true);
+  });
 
 test('5 and 6 should NOT be equal', () => {
   expect(deepEqual(5, 6)).toBe(false);
@@ -37,22 +44,37 @@ test('null and 5 should NOT be equal', () => {
   expect(deepEqual(null, 5)).toBe(false);
 });
 
-test(`${a} and null should NOT be equal`, () => {
-  expect(deepEqual(a, null)).toBe(false);
+test(`Object and null should NOT be equal`, () => {
+  expect(deepEqual(testObj, null)).toBe(false);
 });
 
-test(`${a} and ${c} should NOT be equal`, () => {
-  expect(deepEqual(a, c)).toBe(false);
-});
+test(
+  `Object and its copy with extra null property should not be equal`,
+  () => {
+    expect(deepEqual(testObj, testObjExtraNullProperty)).toBe(false);
+  });
 
-test(`${a} and ${d} should NOT be equal`, () => {
-  expect(deepEqual(a, d)).toBe(false);
-});
+test(
+  `Object and its copy with changed property should not be equal`,
+  () => {
+    expect(deepEqual(testObj, testObjChangedProperty)).toBe(false);
+  });
 
-test(`${a} and ${e} should NOT be equal`, () => {
-  expect(deepEqual(a, e)).toBe(false);
-});
+test(
+  `Object and its copy with changed nested property should not be equal`,
+  () => {
+    expect(deepEqual(
+      testObj,
+      testObjChangedPropertyInNestedObj))
+      .toBe(false);
+  });
 
-test(`${a} and ${f} should NOT be equal`, () => {
-  expect(deepEqual(a, f)).toBe(false);
-});
+test(
+  `Object and its copy with extra null property in nested object
+   shouldn't be equal`,
+  () => {
+    expect(deepEqual(
+      testObj,
+      testObjExtraNullPropertyInNestedObj))
+      .toBe(false);
+  });

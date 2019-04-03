@@ -2,10 +2,11 @@
 
 /**
  * Implement deepEqual function:
+ *
  * Function compares 2 values
- * for primitives it should compare types and values of given params
- * for objects it should check all fields and compare primitive values
- * inside all fields. Nested objects should be compared too.
+ * for primitives it compares types and values of given params
+ * for objects it checks all fields and compare primitive values
+ * inside all fields. Nested objects are compared too.
  *
  * @param {any} a
  * @param {any} b
