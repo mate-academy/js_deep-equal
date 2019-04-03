@@ -10,7 +10,7 @@ const e = { name: 'Misha', order: { price: 1000 } };
 const f = { name: 'Misha', order: { price: 20, extraField: null } };
 
 test('5 and 5 should be equal', () => {
-    expect(deepEqual(5, 5)).toBe(true);
+  expect(deepEqual(5, 5)).toBe(true);
 });
 
 test('null and null should be equal', () => {
@@ -22,7 +22,7 @@ test(`${a} and ${b} should be equal`, () => {
 });
 
 test('A and B should be equal', () => {
-  expect(deepEqual({test: a}, {test: b})).toBe(true);
+  expect(deepEqual({ test: a }, { test: b })).toBe(true);
 });
 
 test('5 and 6 should NOT be equal', () => {
