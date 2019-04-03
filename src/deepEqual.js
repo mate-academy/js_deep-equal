@@ -22,7 +22,7 @@
  *
  */
 
-function deepEqual (a, b) {
+function deepEqual(a, b) {
   // write code here
 }
 
