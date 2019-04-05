@@ -3,10 +3,8 @@
 /**
  * Implement deepEqual function:
  *
- * Function compares 2 values
- * for primitives it compares types and values of given params
- * for objects it checks all fields and compare primitive values
- * inside all fields. Nested objects are compared too.
+ * Non object types are compared with ===
+ * Objects are equal if all the own enumerable properties are equal
  *
  * @param {any} a
  * @param {any} b
@@ -20,9 +18,7 @@
  * deepEqual({test: 5}, {test: 5}) === true
  * deepEqual({test: {abc: 5}}, {test: {abc: 5}}) === true
  * deepEqual({test: {abc: 5}}, {test: {abc: 5, def: 4}}) === false
- *
  */
-
 function deepEqual(a, b) {
   // write code here
 }
