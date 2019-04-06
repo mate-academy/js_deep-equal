@@ -24,57 +24,63 @@
  */
 
 function deepEqual(a, b) {
-  if (typeof (a) === 'number' && typeof (b) === 'number' && a === b) {
-    return true;
-  }
-  if (a === null && b === null) {
-    return true;
+  if ((a === null && b !== null) || (a !== null && b === null)) {
+    return false;
   }
   if (typeof (a) === 'object' && typeof (b) === 'object') {
-    let str = '';
-    let strTwo = '';
-    let number = 0;
-    let numberTwo = 0;
-    for (let c in a) {
-      if (a[c] === null) {
-        return false;
-      }
-      if (typeof (a[c]) !== 'object') {
-        str += a[c];
-      } else if (typeof (a[c]) === 'object') {
-        for (let e in a[c]) {
-          if (a[c][e] !== null) {
-            number += a[c][e];
-          } else {
-            return false;
-          }
-        }
-      }
-    }
-    for (let d in b) {
-      if (b[d] === null) {
-        return false;
-      }
-      if (typeof (b[d]) !== 'object') {
-        strTwo += b[d];
+    let countA = 0;
+    let countB = 0;
+    let strA = '';
+    let strB = '';
+    let numberA = 0;
+    let numberB = 0;
+    for (let key in a) {
+      countA++;
+      if (a[key] === 'object') {
+        deepEqual(a[key]);
       } else {
-        for (let r in b[d]) {
-          if (b[d][r] !== null) {
-            numberTwo += b[d][r];
-          } else {
+        for (let item in a[key]) {
+          if (typeof (a[key][item]) === 'string') {
+            strA += a[key][item];
+          } else if (a[key][item] === null) {
             return false;
+          } else {
+            numberA += a[key][item];
           }
         }
       }
     }
-    if (str === strTwo && number === numberTwo) {
+    for (let key in b) {
+      countB++;
+      if (b[key] === 'object') {
+        deepEqual(b[key]);
+      } else {
+        for (let item in b[key]) {
+          if (typeof (b[key][item]) === 'string') {
+            strB += b[key][item];
+          } else if (b[key][item] === null) {
+            return false;
+          } else {
+            numberB += b[key][item];
+          }
+        }
+      }
+    }
+    if ((strA === strB && numberA === numberB) && (countA === countB)) {
       return true;
+    } else {
+      return false;
     }
   }
-  if ((typeof (a) === 'object' && b === null) || (typeof (b) === 'object' && a === null)) {
-    return false;
-  } else {
+  if (typeof (a) === 'number' && typeof (b) === 'number') {
+    if (a - b === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  } if (a !== false && b === false) {
     return false;
   }
 }
+
 module.exports = deepEqual;
