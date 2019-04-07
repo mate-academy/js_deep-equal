@@ -20,7 +20,24 @@
  * deepEqual({test: {abc: 5}}, {test: {abc: 5, def: 4}}) === false
  */
 function deepEqual(a, b) {
-  // write code here
+  let paramType = typeof a && typeof b;
+  if (a === b) {
+    return true;
+  } else if (a && b && paramType === 'object') {
+    if (Object.keys(a).length === Object.keys(b).length) {
+      for (let key in a) {
+        if (key in b) {
+          if (!deepEqual(a[key], b[key])) {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      }
+      return true;
+    }
+  }
+  return false;
 }
 
 module.exports = deepEqual;
