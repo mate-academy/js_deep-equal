@@ -61,7 +61,7 @@ function compareObjects(objA, objB) {
         }
       }
     } else {
-      console.log('fasle \t \t length of object is not the same therefore they are not equal');
+      console.log('false \t \t length of object is not the same therefore they are not equal');
       return false;
     }
   } else {
