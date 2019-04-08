@@ -23,13 +23,13 @@
  *
  */
 
-function isEquals(value1, value2) {
+function isEqual(value1, value2) {
   return typeof value1 === typeof value2 && value1 === value2;
 }
 
-function isObject(elem, elem2) {
+function isObject(elem) {
   let result;
-  if (elem === null || elem2 === null) {
+  if (elem === null) {
     result = false;
   } else if (typeof elem === 'object') {
     result = true;
@@ -39,23 +39,20 @@ function isObject(elem, elem2) {
   return result;
 }
 
-function objLength(obj1, obj2) {
+function isKeysLengthEqual(obj1, obj2) {
   return Object.keys(obj1).length === Object.keys(obj2).length;
 }
 
 function deepEqual(a, b) {
-  if (isObject(a, b)) {
-    if (objLength(a, b)) {
+  if (isObject(a) && isObject(b)) {
+    if (isKeysLengthEqual(a, b)) {
       for (let key in a) {
         let keyOfA = a[key];
         let keyOfB = b[key];
-        if (isObject(keyOfA, keyOfB) && deepEqual(keyOfA, keyOfB)) {
+        if (isObject(keyOfA) && isObject(keyOfB) && deepEqual(keyOfA, keyOfB)) {
           continue;
         }
-        if (Object.keys(b).includes(key)) {
-          if (keyOfA !== keyOfB) {
-            return false;
-          }
+        if (keyOfA === keyOfB) {
           continue;
         }
         return false;
@@ -64,7 +61,7 @@ function deepEqual(a, b) {
     }
     return false;
   }
-  return isEquals(a, b);
+  return isEqual(a, b);
 }
 
 module.exports = deepEqual;
