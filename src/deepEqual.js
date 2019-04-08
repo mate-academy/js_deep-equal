@@ -24,7 +24,7 @@ function deepEqual(a, b) {
   let typeOfA = typeof a;
   let typeOfB = typeof b;
 
-  if (typeOfA === typeOfB && typeOfA !== null) {
+  if (typeOfA === typeOfB && typeOfA !== null && typeOfB !== null) {
     if (typeOfA === 'object') {
       if (!isEqualObjectsByKeys(a, b)) {
         return false;
