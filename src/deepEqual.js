@@ -31,7 +31,7 @@ function deepEqual(obj1, obj2) {
   var numPropertiesInObj1 = 0;
   var numPropertiesInObj2 = 0;
   for (var property in obj1) {
-    numPropertiesInObj1 += 1;
+    numPropertiesInObj1 = Object.keys(obj1).length;
   }
   for (property in obj2) {
     numPropertiesInObj2 += 1;
