@@ -30,7 +30,6 @@ function deepEqual(a, b) {
     if (Object.keys(a).length !== Object.keys(b).length) {
       return false;
     }
-    
     for (var prop in a) {
       if (b.hasOwnProperty(prop)) {
         if (!deepEqual(a[prop], b[prop])) {
