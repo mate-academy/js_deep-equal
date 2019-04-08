@@ -24,7 +24,22 @@
  */
 
 function deepEqual(a, b) {
-  // write code here
+  if (a === b) {
+    return true;
+  }
+  if (a === null || b === null) { return a === b; };
+  if (isObject(a, b)) {
+    for (let key in a) {
+      if (!deepEqual(a[key], b[key])) {
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
 }
 
+function isObject(a, b) {
+  return typeof a && typeof b === 'object' && Object.keys(a).length === Object.keys(b).length;
+}
 module.exports = deepEqual;
