@@ -20,7 +20,11 @@
  * deepEqual({test: {abc: 5}}, {test: {abc: 5, def: 4}}) === false
  */
 function deepEqual(a, b) {
-  if (typeof a === 'object' && typeof b === 'object' && a !== null && b !== null) {
+  let typesBooleanResult = typeof a === 'object' && typeof b === 'object' && a !== null && b !== null;
+  if (!typesBooleanResult) {
+    return a === b;
+  }
+  if (typesBooleanResult) {
     if (Object.keys(a).length !== Object.keys(b).length) {
       return false;
     }
@@ -35,6 +39,6 @@ function deepEqual(a, b) {
         return false;
       }
     } return true;
-  } return a === b;
+  }
 };
 module.exports = deepEqual;
