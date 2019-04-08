@@ -30,7 +30,7 @@ function deepEqual(a, b) {
   if ((a === null && b === null) || typeof (a) !== 'object' || typeof (b) !== 'object') {
     return a === b;
   }
-  if (a !== null && b !== null && Object.keys(a).length === Object.keys(b).length) {
+  if ((a !== null && b !== null) && Object.keys(a).length === Object.keys(b).length) {
     for (let key in a) {
       if (!deepEqual(a[key], b[key])) {
         return false;
