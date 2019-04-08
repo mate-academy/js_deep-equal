@@ -21,6 +21,26 @@
  */
 function deepEqual(a, b) {
   // write code here
+  if (a === b) {
+    return true;
+  }
+  if (a == null || typeof a !== 'object' ||
+  b == null || typeof b !== 'object') {
+    return false;
+  }
+  let propsInA = 0;
+  let propsInB = 0;
+  let prop;
+  for (prop in a) {
+    propsInA += 1;
+  }
+  for (prop in b) {
+    propsInB += 1;
+    if (!(prop in a) || !deepEqual(a[prop], b[prop])) {
+      return false;
+    }
+  }
+  return propsInA === propsInB;
 }
 
 module.exports = deepEqual;
