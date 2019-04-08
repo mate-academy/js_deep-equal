@@ -38,8 +38,6 @@ function deepEqual(a, b) {
         }
         return true;
       }
-    } else if (a === null && b === null) {
-      return true;
     } else {
       return false;
     }
