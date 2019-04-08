@@ -19,8 +19,35 @@
  * deepEqual({test: {abc: 5}}, {test: {abc: 5}}) === true
  * deepEqual({test: {abc: 5}}, {test: {abc: 5, def: 4}}) === false
  */
-function deepEqual(a, b) {
-  // write code here
+  function deepEqual(a, b) {
+    if (typeof a === 'object' && typeof b === 'object') {
+      if (a === null || b === null) {
+        return a === b;
+      } else {
+        return isObjectsEqual(a, b);
+      }
+    } else {
+      return a === b;
+    }
+  }
+
+  function isObjectsEqual(obj1, obj2) {
+    let equal = false;
+    if (Object.keys(obj1).length !== Object.keys(obj2).length) {
+      return equal;
+    } else {
+      for (let key in obj1) {
+        if (typeof obj1[key] === 'object' && typeof obj2[key] === 'object') {
+          equal = isObjectsEqual(obj1[key], obj2[key]);
+        } else {
+          equal = obj1[key] === obj2[key];
+        }
+        if (equal === false) {
+          return equal;
+        }
+      }
+      return equal;
+    }
 }
 
 module.exports = deepEqual;
