@@ -36,8 +36,6 @@ function deepEqual(a, b) {
         if (!deepEqual(a[property], b[property])) {
           return false;
         }
-      } else {
-        return false;
       }
     }
     return true;
