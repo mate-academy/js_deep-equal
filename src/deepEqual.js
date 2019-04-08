@@ -27,18 +27,18 @@ function deepEqual(a, b) {
     b === null || typeof (b) !== 'object') {
     return false;
   }
-  var propertiesInA = 0;
-  var propertiesInB = 0;
-  for (var property in a) {
-    propertiesInA++;
+  var countPropA = 0;
+  var countPropB = 0;
+  for (var key in a) {
+    countPropA++;
   }
-  for (property in b) {
-    propertiesInB++;
-    if (!(property in a) || !deepEqual(a[property], b[property])) {
+  for (key in b) {
+    countPropB++;
+    if (!(key in a) || !deepEqual(a[key], b[key])) {
       return false;
     }
   }
-  return propertiesInA === propertiesInB;
+  return countPropA === countPropB;
 }// write code here
 
 module.exports = deepEqual;
