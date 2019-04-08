@@ -20,9 +20,7 @@
  * deepEqual({test: {abc: 5}}, {test: {abc: 5, def: 4}}) === false
  */
 function deepEqual(a, b) {
-  if (a === b) {
-    return true;
-  }
+  // write code here
 }
 
 module.exports = deepEqual;
