@@ -20,22 +20,15 @@
  * deepEqual({test: {abc: 5}}, {test: {abc: 5, def: 4}}) === false
  */
 function deepEqual(a, b) {
-  let paramType = typeof a && typeof b;
   if (a === b) {
     return true;
-  } else if (a && b && paramType === 'object') {
-    if (Object.keys(a).length === Object.keys(b).length) {
-      for (let key in a) {
-        if (key in b) {
-          if (!deepEqual(a[key], b[key])) {
-            return false;
-          }
-        } else {
-          return false;
-        }
+  } else if (a && b && typeof a && typeof b === 'object' && Object.keys(a).length === Object.keys(b).length) {
+    for (let key in a) {
+      if (!deepEqual(a[key], b[key])) {
+        return false;
       }
-      return true;
     }
+    return true;
   }
   return false;
 }
