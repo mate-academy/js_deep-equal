@@ -20,7 +20,25 @@
  * deepEqual({test: {abc: 5}}, {test: {abc: 5, def: 4}}) === false
  */
 function deepEqual(a, b) {
-  // write code here
-}
+  if (a === b) {
+    return true;
+  }
+  if (a === null || typeof (a) !== 'object' ||
+    b === null || typeof (b) !== 'object') {
+    return false;
+  }
+  var countPropA = 0;
+  var countPropB = 0;
+  for (var key in a) {
+    countPropA++;
+  }
+  for (key in b) {
+    countPropB++;
+    if (!(key in a) || !deepEqual(a[key], b[key])) {
+      return false;
+    }
+  }
+  return countPropA === countPropB;
+}// write code here
 
 module.exports = deepEqual;
