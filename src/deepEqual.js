@@ -43,7 +43,7 @@ function deepEqual(a, b) {
 
 function isEqualObjectsByKeys(a, b) {
   for (let key in a) {
-    if (key in b) {
+    if (b !== null) {
       if (!deepEqual(a[key], b[key])) { // (*) Доступ к ключю a.key видит undefined... Почему так?
         return false;
       }
