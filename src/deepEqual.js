@@ -22,54 +22,41 @@
  * deepEqual({test: {abc: 5}}, {test: {abc: 5, def: 4}}) === false
  *
  */
-
 function deepEqual(a, b) {
-  let typeOfA = typeof (a);
-  let typeOfB = typeof (b);
-
-  if ((typeOfA === typeOfB)) {
-    if ((typeOfA === 'object' && a === null) || typeOfA === undefined || typeOfA !== 'object') {
-      return comparePrimitives(a, b);
-    }
-    return compareObjects(a, b);
-  }
-  console.log('false \t \t they are different types');
-  return false;
-}
-
-function comparePrimitives(a, b) {
-  console.log(a === b);
-  return a === b;
-}
-
-function compareObjects(objA, objB) {
-  if (objA === null || objB === null) {
-    return false;
-  }
-  let propertiesA = Object.keys(objA);
-  let propertiesB = Object.keys(objB);
-
-  if (typeof (objA) === 'object') {
-    if (propertiesA.length === propertiesB.length) {
-      for (var eachProperty of propertiesA) {
-        if (objB.hasOwnProperty(eachProperty) && objB[eachProperty]) {
-          // if (propertiesA[eachProperty] === null || propertiesA[eachProperty] === undefined) {return false;}
-          return compareObjects(objA[eachProperty], objB[eachProperty]);
-        } else {
-          console.log('false \t\t b has no same property as object a');
-          return false;
-        }
-      }
-    } else {
-      console.log('false \t \t length of object is not the same therefore they are not equal');
+  if (a === b) {
+    return a === b;
+  } else if ((typeof a === typeof b && typeof a === 'object' && a !== null && b !== null)) {
+    if (Object.keys(a).length !== Object.keys(b).length) {
       return false;
     }
+
+    for (let property of Object.keys(a)) {
+      if (b.hasOwnProperty(property)) {
+        if (!deepEqual(a[property], b[property])) {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }
+    return true;
   } else {
-    return comparePrimitives(objA, objB);
+    return false;
   }
 }
 
 module.exports = deepEqual;
 
-deepEqual({ test: 5 }, { test: 5, extra: null });
-deepEqual({ test: { abc: 5 } }, { test: { def: 5 } });
+deepEqual({ test: 5, extra: 123 }, { test: 5, extra: null });
+
+deepEqual(5, 5);
+deepEqual(1, 2);
+deepEqual(10, 10);
+deepEqual('10', 10);
+deepEqual(0, false);
+deepEqual({ test: 5 }, { test: 5, sd: 6 });
+deepEqual({ test: { abc: 5 } }, { test: { abc: 5 } });
+deepEqual({ test: { abc: 5 } }, { test: { abc: 5, def: 4 } });
+
+deepEqual({ test: 5, extra: 123 }, { test: 5, extra: null });
+deepEqual({ test: { abc: { ds: 13 } } }, { test: { abc: { as: 12 } } });
