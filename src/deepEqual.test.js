@@ -34,14 +34,20 @@ test('null and null should be equal', () => {
 });
 
 test(
-  `Objects with same properties but in different order should be equal`,
+  `Objects with same properties but in different order should be equal
+  input:
+    - a = ${JSON.stringify(testObj)},
+    - b = ${JSON.stringify(testObjPropertiesInDifferentOrder)}`,
   () => {
     expect(deepEqual(testObj, testObjPropertiesInDifferentOrder))
       .toBe(true);
   });
 
 test(
-  'Nested Objects with same properties but in different order should be equal',
+  `Nested Objects with same properties but in different order should be equal
+  input:
+    - a = ${JSON.stringify({ test: testObj })},
+    - b = ${JSON.stringify({ test: testObjPropertiesInDifferentOrder })}`,
   () => {
     expect(deepEqual(
       { test: testObj },
@@ -61,24 +67,38 @@ test('null and 5 should NOT be equal', () => {
   expect(deepEqual(null, 5)).toBe(false);
 });
 
-test(`Object and null should NOT be equal`, () => {
-  expect(deepEqual(testObj, null)).toBe(false);
-});
+test(
+  `Object and null should NOT be equal
+  input:
+    - a = ${JSON.stringify(testObj)},
+    - b = null`,
+  () => {
+    expect(deepEqual(testObj, null)).toBe(false);
+  });
 
 test(
-  `Object and its copy with extra null property should not be equal`,
+  `Object and its copy with extra null property should not be equal
+  input: 
+    - a = ${JSON.stringify(testObj)},
+    - b = ${JSON.stringify(testObjExtraNullProperty)}`,
   () => {
     expect(deepEqual(testObj, testObjExtraNullProperty)).toBe(false);
   });
 
 test(
-  `Object and its copy with changed property should not be equal`,
+  `Object and its copy with changed property should not be equal
+  input:
+    - a = ${JSON.stringify(testObj)},
+    - b = ${JSON.stringify(testObjChangedProperty)}`,
   () => {
     expect(deepEqual(testObj, testObjChangedProperty)).toBe(false);
   });
 
 test(
-  `Object and its copy with changed nested property should not be equal`,
+  `Object and its copy with changed nested property should not be equal
+  input:
+    - a = ${JSON.stringify(testObj)},
+    - b = ${JSON.stringify(testObjChangedPropertyInNestedObj)}`,
   () => {
     expect(deepEqual(
       testObj,
@@ -88,7 +108,10 @@ test(
 
 test(
   `Object and its copy with extra null property in nested object
-   shouldn't be equal`,
+   shouldn't be equal
+   input:
+    - a = ${JSON.stringify(testObj)},
+    - b = ${JSON.stringify(testObjExtraNullPropertyInNestedObj)}`,
   () => {
     expect(deepEqual(
       testObj,
