@@ -24,16 +24,10 @@
  */
 
 function isEquals(value1, value2) {
-  if (typeof value1 === typeof value2) {
-    if (value1 === value2) {
-      return true;
-    }
-    return false;
-  }
-  return false;
+  return typeof value1 === typeof value2 && value1 === value2;
 }
 
-function isObjectNotNull(elem, elem2) {
+function isObject(elem, elem2) {
   let result;
   if (elem === null || elem2 === null) {
     result = false;
@@ -45,19 +39,18 @@ function isObjectNotNull(elem, elem2) {
   return result;
 }
 
-const objLength = (obj) => Object.keys(obj).length;
+function objLength(obj1, obj2) {
+  return Object.keys(obj1).length === Object.keys(obj2).length;
+}
 
 function deepEqual(a, b) {
-  if (isObjectNotNull(a, b)) {
-    if (objLength(a) === objLength(b)) {
+  if (isObject(a, b)) {
+    if (objLength(a, b)) {
       for (let key in a) {
         let keyOfA = a[key];
         let keyOfB = b[key];
-        if (isObjectNotNull(a[key], b[key])) {
-          if (deepEqual(a[key], b[key])) {
-            continue;
-          }
-          return false;
+        if (isObject(keyOfA, keyOfB) && deepEqual(keyOfA, keyOfB)) {
+          continue;
         }
         if (Object.keys(b).includes(key)) {
           if (keyOfA !== keyOfB) {
