@@ -24,8 +24,9 @@
  */
 function deepEqual(a, b) {
   if (a === b) {
-    return a === b;
-  } else if ((typeof a === typeof b && typeof a === 'object' && a !== null && b !== null)) {
+    return true;
+  }
+  if ((typeof a === typeof b && typeof a === 'object' && a !== null && b !== null)) {
     if (Object.keys(a).length !== Object.keys(b).length) {
       return false;
     }
@@ -40,23 +41,8 @@ function deepEqual(a, b) {
       }
     }
     return true;
-  } else {
-    return false;
   }
+  return false;
 }
 
 module.exports = deepEqual;
-
-deepEqual({ test: 5, extra: 123 }, { test: 5, extra: null });
-
-deepEqual(5, 5);
-deepEqual(1, 2);
-deepEqual(10, 10);
-deepEqual('10', 10);
-deepEqual(0, false);
-deepEqual({ test: 5 }, { test: 5, sd: 6 });
-deepEqual({ test: { abc: 5 } }, { test: { abc: 5 } });
-deepEqual({ test: { abc: 5 } }, { test: { abc: 5, def: 4 } });
-
-deepEqual({ test: 5, extra: 123 }, { test: 5, extra: null });
-deepEqual({ test: { abc: { ds: 13 } } }, { test: { abc: { as: 12 } } });
