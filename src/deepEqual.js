@@ -43,14 +43,12 @@ function deepEqual(a, b) {
 
 function isEqualObjectsByKeys(a, b) {
   for (let key in a) {
-    if (typeof a[key] === 'object') { // (*) Доступ к ключю a.key видит undefined... Почему так?
-      if (!deepEqual(a[key], b[key])) {
+    if (key in b) {
+      if (!deepEqual(a[key], b[key])) { // (*) Доступ к ключю a.key видит undefined... Почему так?
         return false;
       }
     } else {
-      if (a[key] !== b[key]) {
-        return false;
-      }
+      return false;
     }
   }
   return true;
