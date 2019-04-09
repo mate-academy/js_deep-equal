@@ -20,30 +20,21 @@
  * deepEqual({test: {abc: 5}}, {test: {abc: 5, def: 4}}) === false
  */
 function deepEqual(a, b) {
-  if (a === b) {
-    return true;
-  } else if (typeof a === 'object' && typeof b === 'object') {
-    if (a !== null && b !== null) {
-      if (Object.keys(a).length !== Object.keys(b).length) {
-        return false;
-      } else {
-        for (let key in a) {
-          if (b.hasOwnProperty(key)) {
-            if (!deepEqual(a[key], b[key])) {
-              return false;
-            }
-          } else {
-            return false;
-          }
-        }
-        return true;
-      }
-    } else {
-      return false;
-    }
-  } else {
+  if (typeof a !== 'object' || a === null || typeof b !== 'object' || b === null) {
+    return a === b;
+  }
+
+  if (Object.keys(a).length !== Object.keys(b).length) {
     return false;
   }
+
+  for (let key in a) {
+    if (!b.hasOwnProperty(key) || !deepEqual(a[key], b[key])) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 module.exports = deepEqual;
