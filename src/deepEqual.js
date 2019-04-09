@@ -24,18 +24,21 @@
  */
 
 function deepEqual(a, b) {
+  const _isObj = arg => typeof arg === 'object' && arg !== null;
+  const _isKeys = arg => Object.keys(arg);
+
   if (a === b) {
     return true;
-  } else if ((typeof a === 'object' && a !== null) && (typeof b === 'object' && b !== null)) {
-    if (Object.keys(a).length !== Object.keys(b).length) {
+  }
+  if (_isObj(a) && _isObj(b)) {
+    if (_isKeys(a).length !== _isKeys(b).length) {
       return false;
     }
-    for (var prop in a) {
-      if (b.hasOwnProperty(prop)) {
-        if (!deepEqual(a[prop], b[prop])) {
-          return false;
-        }
-      } else {
+    for (let prop in a) {
+      if (!(prop in b)) {
+        return false;
+      }
+      if (!deepEqual(a[prop], b[prop])) {
         return false;
       }
     }
