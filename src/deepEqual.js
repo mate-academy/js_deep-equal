@@ -20,6 +20,7 @@
  * deepEqual({test: {abc: 5}}, {test: {abc: 5, def: 4}}) === false
  */
 function deepEqual(a, b) {
+// check arguments are objects
   if ((typeof a !== 'object' || typeof b !== 'object' || a === null || b == null)) {
     return a === b;
   }
