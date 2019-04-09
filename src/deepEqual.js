@@ -27,12 +27,16 @@ function deepEqual(a, b) {
   let objectOneLength = Object.keys(a).length;
   let objectTwoLength = Object.keys(b).length;
 
+  if (objectOneLength !== objectTwoLength) {
+    return false;
+  }
   for (let key in a) {
     if (!(key in b) || !deepEqual(a[key], b[key])) {
       return false;
     }
   }
-  return objectOneLength === objectTwoLength;
+  // when length equalizer stands here , i try to reduce frequency of comparing
+  return true;
 }
 
 module.exports = deepEqual;
