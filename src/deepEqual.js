@@ -26,7 +26,8 @@ function deepEqual(a, b) {
     if (Object.keys(a).length !== Object.keys(b).length) {
       return false;
     }
-    for (let key of Object.keys(a)) {
+    let objKeys = Object.keys(a);
+    for (let key of objKeys) {
       if (b.hasOwnProperty(key)) {
         if (!deepEqual(a[key], b[key])) {
           return false;
