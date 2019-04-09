@@ -24,34 +24,29 @@ function deepEqual(a, b) {
   let typeOfA = typeof a;
   let typeOfB = typeof b;
 
-  if (typeOfA === typeOfB && typeOfA !== null && typeOfB !== null) {
-    if (typeOfA === 'object') {
-      if (!isEqualObjectsByKeys(a, b)) {
-        return false;
-      }
-      if (!isEqualObjectsByKeys(b, a)) {
-        return false;
-      }
-      return true;
-    } else {
-      return a === b;
-    }
-  } else {
-    return a === null && b === null;
+  if (typeOfA === typeOfB && a === b) { // Если сущности равны сами по себе...
+    return true;
+  } else if (typeOfA !== 'object' || typeOfB !== 'object') { // Неравентсво допустимо только для объктов, для них спец проверка...
+    return false;
   }
-}
 
-function isEqualObjectsByKeys(a, b) {
-  for (let key in a) {
-    if (b !== null) {
-      if (!deepEqual(a[key], b[key])) { // (*) Доступ к ключю a.key видит undefined... Почему так?
-        return false;
-      }
-    } else {
+  if (a !== null && b !== null) {
+    if (Object.keys(a).length !== Object.keys(b).length) { // Если количество ключей объектов не раное - они точно не равны.
       return false;
     }
+    for (let key in a) {
+      if (!(key in b)) {
+        return false;
+      }
+      if (!deepEqual(a[key], b[key])) {
+        return false;
+      }
+    }
+  } else {
+    return false;
   }
-  return true;
+
+  return true; // Если программа выполнилась до этого момента - сущности равны.
 }
 
 module.exports = deepEqual;
