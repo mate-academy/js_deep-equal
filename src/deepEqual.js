@@ -25,13 +25,13 @@
 
 function deepEqual(a, b) {
   const _isObj = arg => typeof arg === 'object' && arg !== null;
-  const _isKeys = arg => Object.keys(arg);
+  const _getKeysLength = arg => Object.keys(arg);
 
   if (a === b) {
     return true;
   }
   if (_isObj(a) && _isObj(b)) {
-    if (_isKeys(a).length !== _isKeys(b).length) {
+    if (_getKeysLength(a).length !== _getKeysLength(b).length) {
       return false;
     }
     for (let prop in a) {
