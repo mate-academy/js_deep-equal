@@ -23,8 +23,35 @@
  *
  */
 
+function objectsCompare(a, b) {
+  let isEqual;
+  if (Object.keys(a).length !== Object.keys(b).length) {
+    return false;
+  }
+
+  for (let item in a) {
+    if (typeof a[item] === typeof b[item] && typeof a[item] === 'object') {
+      isEqual = objectsCompare(a[item], b[item]);
+    } else {
+      isEqual = (a[item] === b[item]);
+    }
+    if (!isEqual) {
+      return isEqual;
+    }
+  }
+  return isEqual;
+}
+
 function deepEqual(a, b) {
-  // write code here
+  if (typeof a === typeof b && typeof a === 'object') {
+    if (a === null || b === null) {
+      return a === b;
+    } else {
+      return objectsCompare(a, b);
+    }
+  } else {
+    return a === b;
+  }
 }
 
 module.exports = deepEqual;
