@@ -3,8 +3,8 @@
 /**
  * Implement deepEqual function:
  *
- * Non object types are compared with ===
- * Objects are equal if all the own enumerable properties are equal
+ * Non object types are compared with ===. Objects are equal if all the own
+ * enumerable properties are equal
  *
  * @param {any} a
  * @param {any} b
