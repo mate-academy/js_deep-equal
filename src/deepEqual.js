@@ -23,9 +23,7 @@
  *
  */
 
-function isEqual(value1, value2) {
-  return typeof value1 === typeof value2 && value1 === value2;
-}
+const isEqual = (value1, value2) => typeof value1 === typeof value2 && value1 === value2;
 
 const isObject = elem => elem !== null && typeof elem === 'object';
 
