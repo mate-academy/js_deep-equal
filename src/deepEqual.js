@@ -27,35 +27,22 @@ function isEqual(value1, value2) {
   return typeof value1 === typeof value2 && value1 === value2;
 }
 
-function isObject(elem) {
-  let result;
-  if (elem === null) {
-    result = false;
-  } else if (typeof elem === 'object') {
-    result = true;
-  } else {
-    result = false;
-  }
-  return result;
-}
+const isObject = elem => elem !== null && typeof elem === 'object';
 
-function isKeysLengthEqual(obj1, obj2) {
-  return Object.keys(obj1).length === Object.keys(obj2).length;
-}
+const isKeysLengthEqual = (obj1, obj2) => Object.keys(obj1).length === Object.keys(obj2).length;
 
 function deepEqual(a, b) {
   if (isObject(a) && isObject(b)) {
     if (isKeysLengthEqual(a, b)) {
       for (let key in a) {
-        let keyOfA = a[key];
-        let keyOfB = b[key];
-        if (isObject(keyOfA) && isObject(keyOfB) && deepEqual(keyOfA, keyOfB)) {
+        let valueOfA = a[key];
+        let valueOfB = b[key];
+        if (isObject(valueOfA) && isObject(valueOfB) && deepEqual(valueOfA, valueOfB)) {
           continue;
         }
-        if (keyOfA === keyOfB) {
-          continue;
+        if (valueOfA !== valueOfB) {
+          return false;
         }
-        return false;
       }
       return true;
     }
