@@ -24,13 +24,16 @@ function deepEqual(a, b) {
   let typeOfA = typeof a;
   let typeOfB = typeof b;
 
-  if (typeOfA === typeOfB && a === b) { // Если сущности равны сами по себе...
+  // If data equal...
+  if (typeOfA === typeOfB && a === b) {
     return true;
-  } else if (typeOfA !== 'object' || typeOfB !== 'object') { // Неравентсво допустимо только для объктов, для них спец проверка...
+  // Only objects can be toataly non equal
+  } else if (typeOfA !== 'object' || typeOfB !== 'object') {
     return false;
   }
 
   if (a !== null && b !== null) {
+    // Objects are non equal if there are different amount of keys in them
     if (Object.keys(a).length !== Object.keys(b).length) { // Если количество ключей объектов не раное - они точно не равны.
       return false;
     }
