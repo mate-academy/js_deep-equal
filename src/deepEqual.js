@@ -20,10 +20,6 @@
  * deepEqual({test: {abc: 5}}, {test: {abc: 5, def: 4}}) === false
  */
 function deepEqual(a, b) {
-  // if (a === b) {
-  //   return true;
-  // }
-
   if ((typeof a !== 'object' || typeof b !== 'object' || a === null || b == null)) {
     return a === b;
   }
