@@ -19,7 +19,7 @@
  * @return {boolean}
  */
 const deepEqual = (a, b) => {
-  if (JSON.stringify(a) === JSON.stringify(b)) {
+  if (a === b) {
     return true;
   } else if (
     (typeof a === 'object' && typeof b === 'object')
