@@ -32,16 +32,8 @@ function deepEqual(a, b) {
         return false;
       }
 
-      switch (typeof (a[prop])) {
-        case 'object':
-          if (!deepEqual(a[prop], b[prop])) {
-            return false;
-          }
-          break;
-        default:
-          if (a[prop] !== b[prop]) {
-            return false;
-          }
+      if (!deepEqual(a[prop], b[prop])) {
+        return false;
       }
     }
 
