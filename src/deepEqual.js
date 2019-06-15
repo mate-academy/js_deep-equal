@@ -1,5 +1,4 @@
 'use strict';
-
 /**
  * Implement deepEqual function:
  *
@@ -19,8 +18,23 @@
  *
  * @return {boolean}
  */
-function deepEqual(a, b) {
-  // write code here
-}
-
+const deepEqual = (a, b) => {
+  if (JSON.stringify(a) === JSON.stringify(b)) {
+    return true;
+  } else if (
+    (typeof a === 'object' && typeof b === 'object')
+  ) {
+    if (JSON.stringify(a).length !== JSON.stringify(b).length) {
+      return false;
+    }
+    for (const prop in a) {
+      if (!deepEqual(a[prop], b[prop])) {
+        return false;
+      }
+    }
+    return true;
+  } else {
+    return false;
+  }
+};
 module.exports = deepEqual;
