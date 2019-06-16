@@ -19,8 +19,32 @@
  *
  * @return {boolean}
  */
-function deepEqual(a, b) {
-  // write code here
-}
+const deepEqual = (a, b) => {
+  if (a === b) {
+    return true;
+  }
+
+  const isObject = (object) => {
+    return object !== null && object.constructor === Object;
+  };
+
+  if (isObject(a) && isObject(b)) {
+    const aStringify = JSON.stringify(a);
+    const bStringify = JSON.stringify(b);
+
+    if (aStringify.length !== bStringify.length) {
+      return false;
+    }
+
+    for (const key in a) {
+      if (!deepEqual(a[key], b[key])) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  return false;
+};
 
 module.exports = deepEqual;
