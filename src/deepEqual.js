@@ -11,7 +11,13 @@
  * deepEqual('10', 10) === false
  * deepEqual(0, false) === false
  * deepEqual({test: 5}, {test: 5}) === true
- * deepEqual({test: {abc: 5}}, {test: {abc: 5}}) === true
+ * deepEqual(
+ a = {
+ test: {
+    abc: 5
+    }
+ }, {
+ test: {abc: 5}}) === true
  * deepEqual({test: {abc: 5}}, {test: {abc: 5, def: 4}}) === false
  *
  * @param {any} a
@@ -19,8 +25,19 @@
  *
  * @return {boolean}
  */
-function deepEqual(a, b) {
-  // write code here
-}
 
+function deepEqual(a, b) {
+  if (a === null || b === null || typeof (a) !== 'object' || typeof (b) !== 'object') {
+    return a === b;
+  }
+  if (Object.keys(a).length === Object.keys(b).length) {
+    for (let key in a) {
+      if (!deepEqual(a[key], b[key])) {
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
+}
 module.exports = deepEqual;
