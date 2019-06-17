@@ -20,8 +20,12 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  if (a === null || b === null
-    || typeof (a) !== 'object' || typeof (b) !== 'object') {
+  if (
+    a === null
+    || b === null
+    || typeof (a) !== 'object'
+    || typeof (b) !== 'object'
+  ) {
     return a === b;
   } else if (Object.keys(a).length === Object.keys(b).length) {
     for (const key in a) {
