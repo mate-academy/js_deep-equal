@@ -19,8 +19,32 @@
  *
  * @return {boolean}
  */
+
 function deepEqual(a, b) {
-  // write code here
+  if (a === b) {
+    return true;
+  }
+
+  if (a == null || typeof a !== 'object'
+  || b == null || typeof b !== 'object') {
+    return false;
+  }
+
+  let aValues = 0;
+  let bValues = 0;
+
+  for (const value in a) {
+    aValues += 1;
+  }
+
+  for (const value in b) {
+    bValues += 1;
+    if (!(value in a) || !deepEqual(a[value], b[value])) {
+      return false;
+    }
+  }
+  
+  return aValues === bValues;
 }
 
 module.exports = deepEqual;
