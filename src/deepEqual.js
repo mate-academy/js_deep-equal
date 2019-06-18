@@ -20,7 +20,38 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  if (a === b) {
+    return true;
+  }
+
+  // проверяем является ли объектом во внешней функции:
+  // проверяте на тип === объект и !== null
+  if (!isObject(a) || !isObject(b)) {
+    return false;
+  }
+
+  // Количество своих ключей в объекте.
+  // Если не равны, то сравнивать уже не надо.
+  // Object.keys() - превращает в список все св-ва
+  // Object.keys(a).length
+  if (Object.keys(a).length !== Object.keys(b).length) {
+    return false;
+  }
+
+  // перебираем все ключи объекта a(список/массив из-за Object.keys())
+  for (const key of Object.keys(a)) {
+    // проверка на несповпадение хоть одного условия VALUE
+    if (!deepEqual(a[key], b[key])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+// внешняя ф-ция: проверяте на тип === объект и !== null
+function isObject(value) {
+  return typeof value === 'object' && value !== null;
 }
 
 module.exports = deepEqual;
