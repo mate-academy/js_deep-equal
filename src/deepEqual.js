@@ -21,6 +21,29 @@
  */
 function deepEqual(a, b) {
   // write code here
+  if (a === b) {
+    return true;
+  }
+
+  if (!isObject(a) || !isObject(b)) {
+    return false;
+  }
+
+  if (Object.keys(a).length !== Object.keys(b).length) {
+    return false;
+  }
+
+  for (const key of Object.keys(a)) {
+    if (!deepEqual(a[key], b[key])) {
+      return false;
+    }
+  }
+  return true;
+
+  function isObject(value) {
+    return typeof value === 'object'
+        && value !== null;
+  }
 }
 
 module.exports = deepEqual;
