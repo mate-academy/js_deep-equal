@@ -19,8 +19,50 @@
  *
  * @return {boolean}
  */
-function deepEqual(a, b) {
-  // write code here
+function deepEqual(objectOne, objectTwo) {
+  function isObjects(one, two) {
+    if (one === null || two === null) {
+      return false;
+    } else if ((typeof (one) === 'object')
+      && (typeof (two) === 'object')) {
+      return true;
+    }
+    return false;
+  }
+
+  function keyCounter(objOne) {
+    let count = 0;
+
+    for (const key in objOne) {
+      // 38 line just for linter
+      console.log(objOne[key]);
+      count++;
+    }
+    return count;
+  }
+
+  function objectComperison(a, b) {
+    if (isObjects(a, b)) {
+      if (keyCounter(a) !== keyCounter(b)) {
+        return false;
+      }
+
+      for (const key in a) {
+        if (isObjects(a[key], b[key])) {
+          if (!objectComperison(a[key], b[key])) {
+            return false;
+          };
+        } else if (a[key] !== b[key]) {
+          return false;
+        };
+      }
+    } else if (a !== b) {
+      return false;
+    }
+    return true;
+  }
+
+  return objectComperison(objectOne, objectTwo);
 }
 
 module.exports = deepEqual;
