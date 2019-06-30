@@ -19,8 +19,39 @@
  *
  * @return {boolean}
  */
-function deepEqual(a, b) {
-  // write code here
+function deepEqual(objectOne, objectTwo) {
+  function isObject(one) {
+    if (typeof (one) === 'object' && one !== null) {
+      return true;
+    }
+    return false;
+  }
+
+  function keyCounter(objOne) {
+    if (objOne) {
+      return Object.keys(objOne).length;
+    }
+    return 0;
+  }
+
+  if (isObject(objectOne)) {
+    if (keyCounter(objectOne) !== keyCounter(objectTwo)) {
+      return false;
+    }
+
+    for (const key in objectOne) {
+      if (!isObject(objectOne[key])
+        && objectOne[key] !== objectTwo[key]) {
+        return false;
+      } else if (!deepEqual(objectOne[key], objectTwo[key])) {
+        return false;
+      };
+    };
+  } else if (objectOne !== objectTwo) {
+    return false;
+  }
+
+  return true;
 }
 
 module.exports = deepEqual;
