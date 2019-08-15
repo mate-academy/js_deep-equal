@@ -22,12 +22,7 @@
 function deepEqual(a, b) {
   if (a === b) {
     return true;
-  } else if (
-    typeof a === 'object'
-    && typeof a === 'object'
-    && a !== null
-    && b !== null
-  ) {
+  } else if (isObject(a) && isObject(b)) {
     if (Object.keys(a).length !== Object.keys(b).length) {
       return false;
     }
@@ -42,6 +37,10 @@ function deepEqual(a, b) {
     return true;
   }
   return false;
+}
+
+function isObject(value) {
+  return value instanceof Object && !(value instanceof Array);
 }
 
 module.exports = deepEqual;
