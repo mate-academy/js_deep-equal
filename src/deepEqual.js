@@ -36,6 +36,8 @@ function deepEqual(a, b) {
     if (aKeys.length !== bKeys.length) {
       return false;
     }
+    aKeys.sort();
+    bKeys.sort();
 
     for (let i = 0; i < aKeys.length; i++) {
       if (aKeys[i] === bKeys[i]) {
