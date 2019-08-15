@@ -23,11 +23,7 @@ function deepEqual(a, b) {
   if (typeof a !== typeof b) {
     return false;
   } else if (typeof a !== 'object') {
-    if (a === b) {
-      return true;
-    } else {
-      return false;
-    }
+    return a === b;
   } else {
     if (a === null && b === null) {
       return true;
@@ -43,7 +39,7 @@ function deepEqual(a, b) {
 
     for (let i = 0; i < aKeys.length; i++) {
       if (aKeys[i] === bKeys[i]) {
-        if (deepEqual(a[aKeys[i]], b[aKeys[i]]) === false) {
+        if (!deepEqual(a[aKeys[i]], b[aKeys[i]])) {
           return false;
         }
       } else {
