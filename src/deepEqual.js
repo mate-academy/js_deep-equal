@@ -22,26 +22,25 @@
 function deepEqual(a, b) {
   if (a === b) {
     return true;
-  } else if (
-    typeof a === 'object'
-    && typeof a === 'object'
-    && a !== null
-    && b !== null
-  ) {
+  } else if (isObject(a) && isObject(b)) {
     if (Object.keys(a).length !== Object.keys(b).length) {
       return false;
     }
-    for (const prop in a) {
-      if (a.hasOwnProperty(prop) !== b.hasOwnProperty(prop)) {
+    for (const key in a) {
+      if (a.hasOwnProperty(key) !== b.hasOwnProperty(key)) {
         return false;
       }
-      if (!deepEqual(a[prop], b[prop])) {
+      if (!deepEqual(a[key], b[key])) {
         return false;
       }
     }
     return true;
   }
   return false;
+}
+
+function isObject(value) {
+  return value instanceof Object && !(value instanceof Array);
 }
 
 module.exports = deepEqual;
