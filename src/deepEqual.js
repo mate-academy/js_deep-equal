@@ -20,7 +20,27 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  if (a === b) {
+    return true;
+  } else if (isObject(a) && isObject(b)) {
+    if (Object.keys(a).length !== Object.keys(b).length) {
+      return false;
+    }
+    for (const key in a) {
+      if (a.hasOwnProperty(key) !== b.hasOwnProperty(key)) {
+        return false;
+      }
+      if (!deepEqual(a[key], b[key])) {
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
+}
+
+function isObject(value) {
+  return value instanceof Object && !(value instanceof Array);
 }
 
 module.exports = deepEqual;
