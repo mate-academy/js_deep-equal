@@ -32,7 +32,7 @@ function deepEqual(a, b) {
       return false;
     }
     for (const prop in a) {
-      if (a.hasOwnProperty(prop) !== b.hasOwnProperty(prop)) {
+      if (a.hasOwnProperty(key) !== b.hasOwnProperty(key)) {
         return false;
       }
       if (!deepEqual(a[prop], b[prop])) {
