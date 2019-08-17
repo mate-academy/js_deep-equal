@@ -30,13 +30,10 @@ function deepEqual(a, b) {
       || b === null || typeof b !== 'object') {
     return false;
   }
-
-  for (const key in a) {
-    aCountProps++;
-  }
+  aCountProps = Object.keys(a).length;
+  bCountProps = Object.keys(b).length;
 
   for (const key in b) {
-    bCountProps++;
     if (!(key in a) || !deepEqual(a[key], b[key])) {
       return false;
     }
