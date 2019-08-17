@@ -20,7 +20,38 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  if (a === null && b === null) {
+    return true;
+  }
+
+  if ((a !== null && b === null)
+  || (a === null && b !== null)) {
+    return false;
+  }
+
+  if (typeof a !== 'object' && typeof b !== 'object') {
+    return a === b;
+  }
+
+  if (Object.keys(a).length !== Object.keys(b).length) {
+    return false;
+  }
+
+  let check = false;
+
+  for (const proporties in a) {
+    if (proporties in b) {
+      check = deepEqual(a[proporties], b[proporties]);
+      if (!check) {
+        break;
+      };
+    } else {
+      check = false;
+      break;
+    }
+  }
+
+  return check;
 }
 
 module.exports = deepEqual;
