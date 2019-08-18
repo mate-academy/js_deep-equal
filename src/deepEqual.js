@@ -39,7 +39,7 @@ function deepEqual(a, b) {
 
   let check = false;
 
-  for (const proporties in a) {
+  for (const proporties of Object.keys(a)) {
     if (proporties in b) {
       check = deepEqual(a[proporties], b[proporties]);
       if (!check) {
