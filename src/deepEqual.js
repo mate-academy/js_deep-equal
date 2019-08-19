@@ -20,12 +20,11 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  if (a === null && b === null) {
+  if ([a, b].every(x => x === null)) {
     return true;
   }
 
-  if ((a !== null && b === null)
-  || (a === null && b !== null)) {
+  if ([a, b].some(x => x === null)) {
     return false;
   }
 
