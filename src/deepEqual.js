@@ -24,6 +24,12 @@ function deepEqual(a, b) {
     return true;
   }
 
+  for (const key in b) {
+    if (b.hasOwnProperty(key) && !a.hasOwnProperty(key)) {
+      return false;
+    }
+  }
+
   if (!(a instanceof Object) || !(b instanceof Object)) {
     return false;
   }
@@ -34,12 +40,6 @@ function deepEqual(a, b) {
     }
 
     if (!deepEqual(a[key], b[key])) {
-      return false;
-    }
-  }
-
-  for (const key in b) {
-    if (b.hasOwnProperty(key) && !a.hasOwnProperty(key)) {
       return false;
     }
   }
