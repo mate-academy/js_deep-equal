@@ -20,7 +20,12 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  if (typeof a === typeof b) {
+    return JSON.stringify(a).split('').sort().join('')
+       === JSON.stringify(b).split('').sort().join('');
+  } else {
+    return false;
+  }
 }
 
 module.exports = deepEqual;
