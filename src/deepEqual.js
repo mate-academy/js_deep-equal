@@ -20,7 +20,28 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  const _isObj = arg => typeof arg === 'object' && arg !== null;
+  const _getKeysLength = arg => Object.keys(arg).length;
+
+  if (a === b) {
+    return true;
+  }
+  if (_isObj(a) && _isObj(b)) {
+    if (_getKeysLength(a) !== _getKeysLength(b)) {
+      return false;
+    }
+    for (let prop in a) {
+      if (!(prop in b)) {
+        return false;
+      }
+      if (!deepEqual(a[prop], b[prop])) {
+        return false;
+      }
+    }
+    return true;
+  } else {
+    return false;
+  }
 }
 
 module.exports = deepEqual;
