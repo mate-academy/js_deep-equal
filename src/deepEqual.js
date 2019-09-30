@@ -19,8 +19,16 @@
  *
  * @return {boolean}
  */
+const _ = require('lodash');
 function deepEqual(a, b) {
-  // write code here
+  if (typeof a !== 'object' && typeof b !== 'object') {
+    return a === b;
+  }
+  let result = false;
+  if (typeof a === 'object' && typeof b === 'object') {
+    result = _.isEqual(a, b);
+  }
+  return result;
 }
 
 module.exports = deepEqual;
