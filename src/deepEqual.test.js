@@ -5,24 +5,24 @@ const deepEqual = require('./deepEqual');
 const testObj = { name: 'Misha', order: { price: 20 } };
 const testObjPropertiesInDifferentOrder = {
   order: { price: 20 },
-  name: 'Misha'
+  name: 'Misha',
 };
 const testObjExtraNullProperty = {
   name: 'Misha',
   order: { price: 20 },
-  extraField: null
+  extraField: null,
 };
 const testObjChangedProperty = {
   order: { price: 20 },
-  name: 'Petya'
+  name: 'Petya',
 };
 const testObjChangedPropertyInNestedObj = {
   name: 'Misha',
-  order: { price: 1000 }
+  order: { price: 1000 },
 };
 const testObjExtraNullPropertyInNestedObj = {
   name: 'Misha',
-  order: { price: 20, extraField: null }
+  order: { price: 20, extraField: null },
 };
 
 const deepObject = {
@@ -30,13 +30,13 @@ const deepObject = {
   order: { price: 20,
     count: 1,
     taxes: {
-      vat: { name: 'vat', amount: { uah: 10, usd: 0.37 } }
+      vat: { name: 'vat', amount: { uah: 10, usd: 0.37 } },
     },
     total: {
       withoutTaxes: { uah: 20, usd: 0.74 },
-      withTaxes: { vat: { uah: 30, usd: 1.11 } }
-    }
-  }
+      withTaxes: { vat: { uah: 30, usd: 1.11 } },
+    },
+  },
 };
 
 const deepObjectPropsInDifferentOrder = {
@@ -44,13 +44,13 @@ const deepObjectPropsInDifferentOrder = {
   order: { count: 1,
     price: 20,
     taxes: {
-      vat: { name: 'vat', amount: { uah: 10, usd: 0.37 } }
+      vat: { name: 'vat', amount: { uah: 10, usd: 0.37 } },
     },
     total: {
       withTaxes: { vat: { uah: 30, usd: 1.11 } },
-      withoutTaxes: { usd: 0.74, uah: 20 }
-    }
-  }
+      withoutTaxes: { usd: 0.74, uah: 20 },
+    },
+  },
 };
 
 const deepObjectExtraNullProperty = {
@@ -58,13 +58,13 @@ const deepObjectExtraNullProperty = {
   order: { price: 20,
     count: 1,
     taxes: {
-      vat: { name: 'vat', amount: { uah: 10, usd: 0.37 } }
+      vat: { name: 'vat', amount: { uah: 10, usd: 0.37 } },
     },
     total: {
       withoutTaxes: { uah: 20, usd: 0.74 },
-      withTaxes: { vat: { uah: 30, usd: 1.11, eur: null } }
-    }
-  }
+      withTaxes: { vat: { uah: 30, usd: 1.11, eur: null } },
+    },
+  },
 };
 
 const deepObjectChangedProperty = {
@@ -72,13 +72,13 @@ const deepObjectChangedProperty = {
   order: { price: 20,
     count: 1,
     taxes: {
-      vat: { name: 'vat', amount: { uah: 10, usd: 0.37 } }
+      vat: { name: 'vat', amount: { uah: 10, usd: 0.37 } },
     },
     total: {
       withoutTaxes: { uah: 20, usd: 575 },
-      withTaxes: { vat: { uah: 30, usd: 1.11, eur: null } }
-    }
-  }
+      withTaxes: { vat: { uah: 30, usd: 1.11, eur: null } },
+    },
+  },
 };
 
 test('5 and 5 should be equal', () => {
@@ -134,7 +134,7 @@ test(
 
 test(
   `Object and its copy with extra null property should not be equal
-  input: 
+  input:
     - a = ${JSON.stringify(testObj)},
     - b = ${JSON.stringify(testObjExtraNullProperty)}`,
   () => {
