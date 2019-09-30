@@ -20,7 +20,27 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  let checker = (a === b);
+
+  if ((typeof a) === 'object' && (typeof b) === 'object' && a !== null && b !== null) {
+    for (const property in a) {
+      if (b.hasOwnProperty(property)) {
+        checker = deepEqual(a[property], b[property]);
+      }
+
+      if (!checker) {
+        return checker;
+      }
+    }
+
+    for (const property in b) {
+      if (!a.hasOwnProperty(property)) {
+        return false;
+      }
+    }
+  }
+
+  return checker;
 }
 
 module.exports = deepEqual;
