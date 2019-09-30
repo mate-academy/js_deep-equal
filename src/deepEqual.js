@@ -19,12 +19,16 @@
  *
  * @return {boolean}
  */
+const _ = require('lodash');
 function deepEqual(a, b) {
-  if (typeof a === 'object' && typeof b === 'object') {
-    return JSON.stringify(a).split('').sort().join('') === JSON
-      .stringify(b).split('').sort().join('');
+  if (typeof a !== 'object' && typeof b !== 'object') {
+    return a === b;
   }
-  return a === b;
+  let result = false;
+  if (typeof a === 'object' && typeof b === 'object') {
+    result = _.isEqual(a, b);
+  }
+  return result;
 }
 
 module.exports = deepEqual;
