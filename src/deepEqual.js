@@ -19,9 +19,7 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  if (
-    a === null
-    || b === null
+  if (a === null || b === null
     || (typeof a === 'number' && typeof b === 'number')
   ) {
     return a === b;
