@@ -2,9 +2,8 @@
 
 /**
  * Implement deepEqual function:
- *
- * Non object types are compared with ===. Objects are equal if all the own
- * enumerable properties are equal
+ * Non object types are compared with ===.
+ * Objects are equal if all the own enumerable properties are equal.
  *
  * deepEqual(1, 2) === false
  * deepEqual(10, 10) === true
@@ -16,11 +15,34 @@
  *
  * @param {any} a
  * @param {any} b
- *
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  if (a === b) {
+    return true;
+  }
+
+  if (a === null || a === undefined || b === null || b === undefined) {
+    return false;
+  }
+
+  if (typeof a === 'object' && typeof b === 'object') {
+    if (Object.keys(a).length !== Object.keys(b).length) {
+      return false;
+    }
+
+    for (const property in a) {
+      if (b.hasOwnProperty(property)) {
+        if (!deepEqual(a[property], b[property])) {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
 }
 
 module.exports = deepEqual;
