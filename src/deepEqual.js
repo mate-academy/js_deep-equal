@@ -20,7 +20,10 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  const objA = JSON.stringify(a).split('').sort().join('');
+  const objB = JSON.stringify(b).split('').sort().join('');
+
+  return (objA === objB);
 }
 
 module.exports = deepEqual;
