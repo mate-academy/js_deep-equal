@@ -20,12 +20,24 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  if (typeof a === typeof b) {
-    return JSON.stringify(a).split('').sort().join('')
-       === JSON.stringify(b).split('').sort().join('');
-  } else {
+  if (a === b) {
+    return true;
+  } else if (a === null || b === null) {
     return false;
+  } else if (Object.keys(a).length !== Object.keys(b).length) {
+    return false;
+  } else if (typeof a === 'object' && typeof b === 'object') {
+    for (const key in a) {
+      if (b.hasOwnProperty(key)) {
+        if (!deepEqual(a[key], b[key])) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
+
+  return false;
 }
 
 module.exports = deepEqual;
