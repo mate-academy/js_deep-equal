@@ -20,7 +20,36 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  if (a === b) {
+    return true;
+  }
+
+  if (isPrimitive(a) && isPrimitive(b)) {
+    return a === b;
+  }
+
+  if (a === null || b === null) {
+    return false;
+  }
+
+  for (const prop in a) {
+    if (a.hasOwnProperty(prop) === null || b.hasOwnProperty(b) === null) {
+      return false;
+    }
+
+    if (!(prop in b)) {
+      return false;
+    }
+    if (!deepEqual(a[prop], b[prop])) {
+      return false;
+    }
+  }
+
+  return Object.keys(a).length === Object.keys(b).length;
+}
+
+function isPrimitive(obj) {
+  return (obj !== Object(obj));
 }
 
 module.exports = deepEqual;
