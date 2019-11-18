@@ -21,6 +21,10 @@
  */
 function deepEqual(a, b) {
   // write code here
+  const param1 = JSON.stringify(a).split('').sort().join('');
+  const param2 = JSON.stringify(b).split('').sort().join('');
+
+  return (param1 === param2);
 }
 
 module.exports = deepEqual;
