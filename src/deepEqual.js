@@ -21,6 +21,9 @@
  */
 function deepEqual(a, b) {
   // write code here
+
+  return JSON.stringify(a).split('').sort().join('')
+         === JSON.stringify(b).split('').sort().join('');
 }
 
 module.exports = deepEqual;
