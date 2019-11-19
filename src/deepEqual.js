@@ -29,10 +29,21 @@ function deepEqual(a, b) {
     return false;
   }
 
-  const firstObject = JSON.stringify(a).split('').sort().join('');
-  const secondObject = JSON.stringify(b).split('').sort().join('');
+  if (Object.keys(a).length !== Object.keys(b).length) {
+    return false;
+  }
 
-  return (firstObject === secondObject);
+  for (const key in a) {
+    if (!b.hasOwnProperty(key)) {
+      return false;
+    }
+
+    if (!deepEqual(a[key], b[key])) {
+      return true;
+    }
+  }
+
+  return true;
 }
 
 module.exports = deepEqual;
