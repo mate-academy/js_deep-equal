@@ -39,7 +39,7 @@ function deepEqual(a, b) {
     }
 
     if (!deepEqual(a[key], b[key])) {
-      return true;
+      return false;
     }
   }
 
