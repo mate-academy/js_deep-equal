@@ -20,20 +20,18 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  const aKeys = Object.keys(a);
-  const bKeys = Object.keys(b);
-
   if (Object.is(a, b)) {
     return true;
   }
-
   if (typeof a !== 'object' || typeof b !== 'object') {
     return false;
   }
-
   if (a === null || b === null) {
     return false;
   }
+
+  const aKeys = Object.keys(a);
+  const bKeys = Object.keys(b);
 
   if (aKeys.length !== bKeys.length) {
     return false;
