@@ -25,14 +25,12 @@ function deepEqual(a, b) {
   }
 
   if (
-    typeof a !== 'object' || typeof b !== 'object'
+    typeof a !== 'object'
+    || typeof b !== 'object'
     || a === null
     || b === null
+    || Object.keys(a).length !== Object.keys(b).length
   ) {
-    return false;
-  }
-
-  if (Object.keys(a).length !== Object.keys(b).length) {
     return false;
   }
 
