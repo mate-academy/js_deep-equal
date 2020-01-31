@@ -1,5 +1,7 @@
 'use strict';
 
+/* eslint-disable */
+
 const deepEqual = require('./deepEqual');
 
 const testObj = { name: 'Misha', order: { price: 20 } };
@@ -134,7 +136,7 @@ test(
 
 test(
   `Object and its copy with extra null property should not be equal
-  input: 
+  input:
     - a = ${JSON.stringify(testObj)},
     - b = ${JSON.stringify(testObjExtraNullProperty)}`,
   () => {
