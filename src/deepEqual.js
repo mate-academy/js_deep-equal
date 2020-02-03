@@ -27,18 +27,12 @@ function deepEqual(a, b) {
   if (typeof a !== typeof b
     || !(typeof a === 'object' || typeof b === 'function')
     || (a === null) !== (b === null)
+    || Object.keys(a).length !== Object.keys(b).length
   ) {
     return false;
   }
 
-  const keysA = Object.keys(a);
-  const keysB = Object.keys(b);
-
-  if (keysA.length !== keysB.length) {
-    return false;
-  }
-
-  for (const key of keysA) {
+  for (const key of Object.keys(a)) {
     if (!b.hasOwnProperty(key) || !deepEqual(a[key], b[key])) {
       return false;
     }
