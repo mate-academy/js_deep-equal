@@ -2,83 +2,83 @@
 
 const deepEqual = require('./deepEqual');
 
-const testObj = { name: 'Misha', order: { price: 20 } };
+const testObj = { name: 'Misha', order: { price: 20 } };/* eslint-disable-line*/
 const testObjPropertiesInDifferentOrder = {
   order: { price: 20 },
-  name: 'Misha'
+  name: 'Misha',
 };
 const testObjExtraNullProperty = {
   name: 'Misha',
   order: { price: 20 },
-  extraField: null
+  extraField: null,
 };
 const testObjChangedProperty = {
   order: { price: 20 },
-  name: 'Petya'
+  name: 'Petya',
 };
 const testObjChangedPropertyInNestedObj = {
   name: 'Misha',
-  order: { price: 1000 }
+  order: { price: 1000 },
 };
 const testObjExtraNullPropertyInNestedObj = {
   name: 'Misha',
-  order: { price: 20, extraField: null }
+  order: { price: 20, extraField: null },/* eslint-disable-line*/
 };
 
 const deepObject = {
   name: 'Misha',
-  order: { price: 20,
+  order: { price: 20,/* eslint-disable-line*/
     count: 1,
     taxes: {
-      vat: { name: 'vat', amount: { uah: 10, usd: 0.37 } }
+      vat: { name: 'vat', amount: { uah: 10, usd: 0.37 } },/* eslint-disable-line*/
     },
     total: {
-      withoutTaxes: { uah: 20, usd: 0.74 },
-      withTaxes: { vat: { uah: 30, usd: 1.11 } }
-    }
-  }
+      withoutTaxes: { uah: 20, usd: 0.74 },/* eslint-disable-line*/
+      withTaxes: { vat: { uah: 30, usd: 1.11 } },/* eslint-disable-line*/
+    },
+  },
 };
 
 const deepObjectPropsInDifferentOrder = {
   name: 'Misha',
-  order: { count: 1,
+  order: { count: 1,/* eslint-disable-line*/
     price: 20,
     taxes: {
-      vat: { name: 'vat', amount: { uah: 10, usd: 0.37 } }
+      vat: { name: 'vat', amount: { uah: 10, usd: 0.37 } },/* eslint-disable-line*/
     },
     total: {
-      withTaxes: { vat: { uah: 30, usd: 1.11 } },
-      withoutTaxes: { usd: 0.74, uah: 20 }
-    }
-  }
+      withTaxes: { vat: { uah: 30, usd: 1.11 } },/* eslint-disable-line*/
+      withoutTaxes: { usd: 0.74, uah: 20 },/* eslint-disable-line*/
+    },
+  },
 };
 
 const deepObjectExtraNullProperty = {
   name: 'Misha',
-  order: { price: 20,
+  order: { price: 20,/* eslint-disable-line*/
     count: 1,
     taxes: {
-      vat: { name: 'vat', amount: { uah: 10, usd: 0.37 } }
+      vat: { name: 'vat', amount: { uah: 10, usd: 0.37 } },/* eslint-disable-line*/
     },
     total: {
-      withoutTaxes: { uah: 20, usd: 0.74 },
-      withTaxes: { vat: { uah: 30, usd: 1.11, eur: null } }
-    }
-  }
+      withoutTaxes: { uah: 20, usd: 0.74 },/* eslint-disable-line*/
+      withTaxes: { vat: { uah: 30, usd: 1.11, eur: null } },/* eslint-disable-line*/
+    },
+  },
 };
 
 const deepObjectChangedProperty = {
   name: 'Misha',
-  order: { price: 20,
+  order: { price: 20,/* eslint-disable-line*/
     count: 1,
     taxes: {
-      vat: { name: 'vat', amount: { uah: 10, usd: 0.37 } }
+      vat: { name: 'vat', amount: { uah: 10, usd: 0.37 } },/* eslint-disable-line*/
     },
     total: {
-      withoutTaxes: { uah: 20, usd: 575 },
-      withTaxes: { vat: { uah: 30, usd: 1.11, eur: null } }
-    }
-  }
+      withoutTaxes: { uah: 20, usd: 575 },/* eslint-disable-line*/
+      withTaxes: { vat: { uah: 30, usd: 1.11, eur: null } },/* eslint-disable-line*/
+    },
+  },
 };
 
 test('5 and 5 should be equal', () => {
@@ -134,7 +134,7 @@ test(
 
 test(
   `Object and its copy with extra null property should not be equal
-  input: 
+  input:
     - a = ${JSON.stringify(testObj)},
     - b = ${JSON.stringify(testObjExtraNullProperty)}`,
   () => {
