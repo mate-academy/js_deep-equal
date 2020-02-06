@@ -19,8 +19,42 @@
  *
  * @return {boolean}
  */
+
 function deepEqual(a, b) {
-  // write code here
+  if (a === b) {
+    return true;
+  }
+
+  function isObject(elem) {
+    return typeof elem === 'object' && elem !== null;
+  }
+
+  function isValidObjects(objA, objB) {
+    return isObject(objA)
+      && isObject(objB);
+  }
+
+  if (!isValidObjects(a, b)) {
+    return false;
+  }
+
+  if (Object.keys(a).length !== Object.keys(b).length) {
+    return false;
+  }
+
+  if (isValidObjects(a, b)) {
+    for (const key in a) {
+      if (!b.hasOwnProperty(key)) {
+        return false;
+      }
+
+      if (!deepEqual(a[key], b[key])) {
+        return false;
+      }
+    }
+  }
+
+  return true;
 }
 
 module.exports = deepEqual;
