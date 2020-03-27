@@ -20,8 +20,11 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  if (a === null || b === null
-    || typeof (a) !== 'object' || typeof (b) !== 'object') {
+  if (a === null
+    || b === null
+    || typeof (a) !== 'object'
+    || typeof (b) !== 'object'
+  ) {
     return a === b;
   }
 
@@ -37,12 +40,10 @@ function deepEqual(a, b) {
       return false;
     }
 
-    if (a[aProperty[i]] !== b[bProperty[i]]
-      && (typeof (a) !== 'object' || typeof (b) !== 'object')) {
-      return false;
-    }
-
-    if (!deepEqual(a[aProperty[i]], b[bProperty[i]])) {
+    if ((a[aProperty[i]] !== b[bProperty[i]]
+      && (typeof (a) !== 'object' || typeof (b) !== 'object'))
+      || (!deepEqual(a[aProperty[i]], b[bProperty[i]]))
+    ) {
       return false;
     }
   }
