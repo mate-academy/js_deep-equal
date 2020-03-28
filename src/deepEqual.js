@@ -20,12 +20,14 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  let x = {};
-  let y = {};
+  let firstContainer = {};
+  let secondContainer = {};
 
+  // check the type of variables
   if (((typeof (a) === 'object')
     || (typeof (b) === 'object'))
     && (a !== null && b !== null)) {
+    // if the type of one of the variables is object - call recursive function
     if (recurs(a, b)) {
       return true;
     } else {
@@ -39,45 +41,33 @@ function deepEqual(a, b) {
     }
   }
 
-  function recurs(a1, b1) {
+  function recurs(first, second) {
     let isLast = true;
 
-    for (const key in a1) {
-      if (b1.hasOwnProperty(key)) {
-        if (a1[key] !== b1[key] && typeof (a1[key]) !== 'object') {
+    if (Object.keys(first).length !== Object.keys(second).length) {
+      return false;
+    }
+
+    for (const key in first) {
+      if (second.hasOwnProperty(key)) {
+        if (first[key] !== second[key] && typeof (first[key]) !== 'object') {
           return false;
         }
 
-        if (typeof (a1[key]) === 'object' || typeof (b1[key]) === 'object') {
+        // if it's embeded object - call recursive function again
+        if (typeof (first[key]) === 'object'
+          || typeof (second[key]) === 'object') {
           isLast = false;
-          x = a1[key];
-          y = b1[key];
+          firstContainer = first[key];
+          secondContainer = second[key];
         }
       } else {
         return false;
       }
     }
 
-    if (Object.keys(a1).length !== Object.keys(b1).length) {
-      for (const key in b1) {
-        if (a1.hasOwnProperty(key)) {
-          if (b1[key] !== a1[key] && typeof (b1[key]) !== 'object') {
-            return false;
-          }
-
-          if (typeof (a1[key]) === 'object' || typeof (b1[key]) === 'object') {
-            isLast = false;
-            x = a1[key];
-            y = b1[key];
-          }
-        } else {
-          return false;
-        }
-      }
-    }
-
     if (!isLast) {
-      return recurs(x, y);
+      return recurs(firstContainer, secondContainer);
     }
 
     return true;
