@@ -24,8 +24,11 @@ function deepEqual(a, b) {
   let bContainer = {};
 
   // check the type of variables
-  if ((typeof (a) === 'object')
-    && (a !== null && b !== null)) {
+  if (
+    (typeof (a) === 'object'
+    && typeof (b) === 'object')
+    && (a !== null && b !== null)
+  ) {
     let isLast = true;
 
     if (Object.keys(a).length !== Object.keys(b).length) {
@@ -33,14 +36,16 @@ function deepEqual(a, b) {
     }
 
     for (const key in a) {
-      if (b.hasOwnProperty(key)) {
+      if (a.hasOwnProperty(key)) {
         if (a[key] !== b[key] && typeof (a[key]) !== 'object') {
           return false;
         }
 
         // if it's embeded object - call deepEqual function again
-        if (typeof (a[key]) === 'object'
-        || typeof (b[key]) === 'object') {
+        if (
+          typeof (a[key]) === 'object'
+          && typeof (b[key]) === 'object'
+        ) {
           isLast = false;
           aContainer = a[key];
           bContainer = b[key];
