@@ -24,8 +24,7 @@ function deepEqual(a, b) {
   let bContainer = {};
 
   // check the type of variables
-  if ((typeof (a) === 'object'
-    && typeof (b) === 'object')
+  if ((typeof (a) === 'object')
     && (a !== null && b !== null)) {
     let isLast = true;
 
