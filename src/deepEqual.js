@@ -20,46 +20,31 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  let firstContainer = {};
-  let secondContainer = {};
+  let aContainer = {};
+  let bContainer = {};
 
   // check the type of variables
-  if (((typeof (a) === 'object')
-    || (typeof (b) === 'object'))
+  if ((typeof (a) === 'object'
+    && typeof (b) === 'object')
     && (a !== null && b !== null)) {
-    // if the type of one of the variables is object - call recursive function
-    if (recurs(a, b)) {
-      return true;
-    } else {
-      return false;
-    }
-  } else {
-    if (a === b) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  function recurs(first, second) {
     let isLast = true;
 
-    if (Object.keys(first).length !== Object.keys(second).length) {
+    if (Object.keys(a).length !== Object.keys(b).length) {
       return false;
     }
 
-    for (const key in first) {
-      if (second.hasOwnProperty(key)) {
-        if (first[key] !== second[key] && typeof (first[key]) !== 'object') {
+    for (const key in a) {
+      if (b.hasOwnProperty(key)) {
+        if (a[key] !== b[key] && typeof (a[key]) !== 'object') {
           return false;
         }
 
-        // if it's embeded object - call recursive function again
-        if (typeof (first[key]) === 'object'
-          || typeof (second[key]) === 'object') {
+        // if it's embeded object - call deepEqual function again
+        if (typeof (a[key]) === 'object'
+        || typeof (b[key]) === 'object') {
           isLast = false;
-          firstContainer = first[key];
-          secondContainer = second[key];
+          aContainer = a[key];
+          bContainer = b[key];
         }
       } else {
         return false;
@@ -67,10 +52,14 @@ function deepEqual(a, b) {
     }
 
     if (!isLast) {
-      return recurs(firstContainer, secondContainer);
+      return deepEqual(aContainer, bContainer);
     }
 
     return true;
+  } else if (a === b) {
+    return true;
+  } else {
+    return false;
   }
 }
 
