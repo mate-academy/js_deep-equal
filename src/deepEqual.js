@@ -35,7 +35,7 @@ function deepEqual(a, b) {
 
   for (const key in a) {
     if (deepEqual(a[key], b[key])) {
-      break;
+      continue;
     } else {
       return false;
     }
@@ -43,7 +43,7 @@ function deepEqual(a, b) {
 
   for (const key in b) {
     if (deepEqual(a[key], b[key])) {
-      break;
+      continue;
     } else {
       return false;
     }
