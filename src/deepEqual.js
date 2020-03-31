@@ -20,26 +20,19 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  if (a === b) {
-    return true;
-  }
-
-  if (typeof a === 'object' && typeof b === 'object'
-    && b !== null && a !== null) {
-    if (Object.keys(a).length !== Object.keys(b).length) {
-      return false;
-    }
-
-    for (const key in a) {
-      if (!deepEqual(a[key], b[key])) {
-        return false;
-      }
-    }
-  }
-
   if (typeof a !== 'object' || typeof b !== 'object'
   || a === null || b === null) {
     return a === b;
+  }
+
+  if (Object.keys(a).length !== Object.keys(b).length) {
+    return false;
+  }
+
+  for (const key in a) {
+    if (!deepEqual(a[key], b[key])) {
+      return false;
+    }
   }
 
   return true;
