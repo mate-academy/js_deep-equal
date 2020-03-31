@@ -26,25 +26,25 @@ function deepEqual(a, b) {
     return false;
   }
 
-  if (typeof a === 'object' && typeof b === 'object') {
-    return deepEqualObjects(a, b) && deepEqualObjects(b, a);
+  if (Object.keys(a).length !== Object.keys(b).length) {
+    return false;
+  }
+
+  if (typeof a === 'object') {
+    for (const key in a) {
+      if (typeof a[key] !== 'object' && a[key] !== b[key]) {
+        return false;
+      }
+
+      if (!deepEqual(a[key], b[key])) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   return (a === b);
-}
-
-function deepEqualObjects(first, second) {
-  for (const key in first) {
-    if (typeof first[key] !== 'object' && first[key] !== second[key]) {
-      return false;
-    }
-
-    if (!deepEqual(first[key], second[key])) {
-      return false;
-    }
-  }
-
-  return true;
 }
 
 module.exports = deepEqual;
