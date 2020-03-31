@@ -20,32 +20,23 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  let countA = 0;
-  let countB = 0;
-
   if (!(typeof a === 'object'
-    && typeof b === 'object'
-    && a !== null
-    && b !== null)) {
+    && typeof b === 'object')
+    || (a === null
+    || b === null)) {
     return a === b;
   }
 
-  for (const key in a) {
-    countA++;
+  if (Object.keys(a).length !== Object.keys(b).length) {
+    return false;
+  }
 
+  for (const key in a) {
     if (deepEqual(a[key], b[key])) {
       continue;
     } else {
       return false;
     }
-  }
-
-  for (const key in b) {
-    countB++;
-  }
-
-  if (countA !== countB) {
-    return false;
   }
 
   return true;
