@@ -21,6 +21,43 @@
  */
 function deepEqual(a, b) {
   // write code here
+  if (a === b) {
+    return true;
+  }
+
+  if (typeof (a) !== typeof (b)) {
+    return false;
+  }
+
+  if (typeof (a) === 'object') {
+    if (JSON.stringify(a).length !== JSON.stringify(b).length) {
+      return false;
+    }
+
+    for (const aKey in a) {
+      let count = 0;
+
+      for (const bKey in b) {
+        if (typeof (a[aKey]) === 'object') {
+          return deepEqual(a[aKey], b[aKey]);
+        }
+
+        if (a[aKey] === b[bKey]) {
+          count++;
+        }
+      }
+
+      if (count !== 1) {
+        return false;
+      }
+    }
+  } else {
+    if (a !== b) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 module.exports = deepEqual;
