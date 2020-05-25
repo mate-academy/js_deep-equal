@@ -20,7 +20,9 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  const getString = item => JSON.stringify(item).split('').sort().join('');
+
+  return getString(a) === getString(b);
 }
 
 module.exports = deepEqual;
