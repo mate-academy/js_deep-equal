@@ -20,9 +20,35 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  const getString = item => JSON.stringify(item).split('').sort().join('');
+  if (typeof a !== typeof b) {
+    return false;
+  }
 
-  return getString(a) === getString(b);
+  if (typeof a === 'object' && a !== b) {
+    if (a === null || b === null) {
+      return false;
+    }
+
+    return JSON.stringify(sortObject(a)) === JSON.stringify(sortObject(b));
+  }
+
+  return JSON.stringify(a) === JSON.stringify(b);
+}
+
+function sortObject(obj) {
+  const sortedKeys = Object.keys(obj).sort();
+  const sortedObject = {};
+
+  for (const key of sortedKeys) {
+    if (typeof obj[key] === 'object' && obj[key] !== null) {
+      sortedObject[key] = sortObject(obj[key]);
+      continue;
+    }
+
+    sortedObject[key] = obj[key];
+  }
+
+  return sortedObject;
 }
 
 module.exports = deepEqual;
