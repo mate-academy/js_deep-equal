@@ -21,11 +21,8 @@
  */
 
 function deepEqual(a, b) {
-  if (a === null && b === null) {
-    return true;
-  } else if (a === null || b === null) {
-    return false;
-  } else if (typeof a !== 'object' && typeof b !== 'object') {
+  if (a === null || b === null
+    || (typeof a !== 'object' && typeof b !== 'object')) {
     return a === b;
   } else if (Object.keys(a).length !== Object.keys(b).length) {
     return false;
@@ -36,10 +33,8 @@ function deepEqual(a, b) {
       if (!deepEqual(a[key], b[key])) {
         return false;
       }
-    } else if (b.hasOwnProperty(key)) {
-      if (a[key] !== b[key]) {
-        return false;
-      }
+    } else if (a[key] !== b[key]) {
+      return false;
     }
   }
 
