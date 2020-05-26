@@ -20,42 +20,22 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  if (typeof (a) !== typeof (b)) {
-    return false;
-  }
-
-  if ((typeof (a) === 'number')
-  || (typeof (a) === 'string')
-  || (a === null || b === null)) {
+  if (typeof a !== 'object' || a === null || b === null) {
     return a === b;
   }
 
-  if (typeof (a) === 'object') {
-    return Equal(a, b);
+  if (Object.keys(a).length !== Object.keys(b).length) {
+    return false;
   }
-}
-
-function Equal(a, b) {
-  // let counterA = 0;
-  // let counterB = 0;
 
   for (const key in a) {
-    // counterA++;
-    // console.log(a[key], key, b[key], key);
-
-    if (!b.hasOwnProperty(key)) {
-      return false;
-    }
-
-    if (typeof (a[key]) === 'object' && typeof (b[key]) === 'object') {
-      Equal(a[key], b[key]);
-    }
-
-    if (a[key] !== b[key]) {
+    if (b.hasOwnProperty(key) === false
+    || deepEqual(a[key], b[key]) === false) {
       return false;
     }
   }
 
   return true;
 }
+module.exports = deepEqual;
 module.exports = deepEqual;
