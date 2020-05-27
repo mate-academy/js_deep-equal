@@ -32,7 +32,7 @@ function deepEqual(a, b) {
     return JSON.stringify(sortObject(a)) === JSON.stringify(sortObject(b));
   }
 
-  return JSON.stringify(a) === JSON.stringify(b);
+  return a === b;
 }
 
 function sortObject(obj) {
