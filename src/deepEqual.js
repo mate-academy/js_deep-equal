@@ -20,35 +20,21 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  if (typeof a !== typeof b) {
+  if (typeof a !== 'object' || a === null || b === null) {
+    return a === b;
+  }
+
+  if (Object.keys(a).length !== Object.keys(b).length) {
     return false;
   }
 
-  if (typeof a === 'object' && a !== b) {
-    if (a === null || b === null) {
+  for (const key in a) {
+    if (!b.hasOwnProperty(key) || !deepEqual(a[key], b[key])) {
       return false;
     }
-
-    return JSON.stringify(sortObject(a)) === JSON.stringify(sortObject(b));
   }
 
-  return a === b;
-}
-
-function sortObject(obj) {
-  const sortedKeys = Object.keys(obj).sort();
-  const sortedObject = {};
-
-  for (const key of sortedKeys) {
-    if (typeof obj[key] === 'object' && obj[key] !== null) {
-      sortedObject[key] = sortObject(obj[key]);
-      continue;
-    }
-
-    sortedObject[key] = obj[key];
-  }
-
-  return sortedObject;
+  return true;
 }
 
 module.exports = deepEqual;
