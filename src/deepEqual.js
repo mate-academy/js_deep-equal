@@ -29,10 +29,6 @@ function deepEqual(a, b) {
   }
 
   for (const key in a) {
-    const c = 'console';
-
-    window[c].log(key);
-
     if (!deepEqual(a[key], b[key])) {
       return false;
     }
