@@ -20,7 +20,41 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  let bool = true;
+
+  if (a === null || b === null) {
+    bool = a === b;
+
+    return bool;
+  }
+
+  if (typeof a !== 'object') {
+    bool = a === b;
+
+    return bool;
+  }
+
+  if (Object.keys(a).length !== Object.keys(b).length) {
+    return false;
+  }
+
+  for (const key in a) {
+    if (typeof a[key] === 'object') {
+      bool = deepEqual(a[key], b[key]);
+
+      if (!bool) {
+        return bool;
+      }
+    } else {
+      bool = a[key] === b[key];
+
+      if (!bool) {
+        return bool;
+      }
+    }
+  }
+
+  return bool;
 }
 
 module.exports = deepEqual;
