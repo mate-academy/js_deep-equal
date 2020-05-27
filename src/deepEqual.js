@@ -20,18 +20,8 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  let bool = true;
-
-  if (a === null || b === null) {
-    bool = a === b;
-
-    return bool;
-  }
-
-  if (typeof a !== 'object') {
-    bool = a === b;
-
-    return bool;
+  if (a === null || b === null || typeof a !== 'object') {
+    return a === b;
   }
 
   if (Object.keys(a).length !== Object.keys(b).length) {
@@ -39,22 +29,12 @@ function deepEqual(a, b) {
   }
 
   for (const key in a) {
-    if (typeof a[key] === 'object') {
-      bool = deepEqual(a[key], b[key]);
-
-      if (!bool) {
-        return bool;
-      }
-    } else {
-      bool = a[key] === b[key];
-
-      if (!bool) {
-        return bool;
-      }
+    if (!deepEqual(a[key], b[key])) {
+      return false;
     }
   }
 
-  return bool;
+  return true;
 }
 
 module.exports = deepEqual;
