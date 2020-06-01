@@ -37,7 +37,7 @@ function deepEqual(a, b) {
   }
 
   for (const key of Object.keys(a)) {
-    if (!b.hasOwnProperty(key) || !deepEqual(a[key], b[key])) {
+    if (!deepEqual(a[key], b[key])) {
       return false;
     }
   }
