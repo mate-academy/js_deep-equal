@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 'use strict';
 
 /**
@@ -20,7 +21,31 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  if (a === b) {
+    return true;
+  }
+
+  if (a == null || typeof (a) !== 'object'
+      || b == null || typeof (b) !== 'object') {
+    return false;
+  }
+
+  let aProps = 0;
+  let bProps = 0;
+
+  for (const property in a) {
+    aProps += 1;
+  }
+
+  for (const property in b) {
+    bProps += 1;
+
+    if (!(property in a) || !deepEqual(a[property], b[property])) {
+      return false;
+    }
+  }
+
+  return aProps === bProps;
 }
 
 module.exports = deepEqual;
