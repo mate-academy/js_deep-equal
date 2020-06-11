@@ -21,6 +21,32 @@
  */
 function deepEqual(a, b) {
   // write code here
+  if (a === b) {
+    return true;
+  }
+
+  if (typeof a === 'string'
+      || a === null
+      || b === null
+      || ((Object.keys(a).length) !== Object.keys(b).length)) {
+    return false;
+  }
+
+  let keys = 0;
+
+  for (const key in a) {
+    if (key === '0') {
+      keys++;
+    } else if (deepEqual(a[key], b[key])) {
+      keys++;
+    }
+
+    if (keys === Object.keys(a).length) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 module.exports = deepEqual;
