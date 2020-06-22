@@ -5,7 +5,7 @@
  *
  * Non object types are compared with ===. Objects are equal if all the own
  * enumerable properties are equal
- *
+ *d
  * deepEqual(1, 2) === false
  * deepEqual(10, 10) === true
  * deepEqual('10', 10) === false
@@ -20,7 +20,22 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  if (a === b) {
+    return true;
+  }
+
+  if (a === null || b === null || typeof (a) !== 'object'
+    || typeof (b) !== 'object') {
+    return false;
+  }
+
+  for (const key in b) {
+    if (!(key in a) || !deepEqual(a[key], b[key])) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 module.exports = deepEqual;
