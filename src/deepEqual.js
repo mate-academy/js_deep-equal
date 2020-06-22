@@ -20,7 +20,51 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  let aContainer = {};
+  let bContainer = {};
+
+  // check the type of variables
+  if (
+    (typeof (a) === 'object'
+    && typeof (b) === 'object')
+    && (a !== null && b !== null)
+  ) {
+    let isLast = true;
+
+    if (Object.keys(a).length !== Object.keys(b).length) {
+      return false;
+    }
+
+    for (const key in a) {
+      if (a.hasOwnProperty(key)) {
+        if (a[key] !== b[key] && typeof (a[key]) !== 'object') {
+          return false;
+        }
+
+        // if it's embeded object - call deepEqual function again
+        if (
+          typeof (a[key]) === 'object'
+          && typeof (b[key]) === 'object'
+        ) {
+          isLast = false;
+          aContainer = a[key];
+          bContainer = b[key];
+        }
+      } else {
+        return false;
+      }
+    }
+
+    if (!isLast) {
+      return deepEqual(aContainer, bContainer);
+    }
+
+    return true;
+  } else if (a === b) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 module.exports = deepEqual;
