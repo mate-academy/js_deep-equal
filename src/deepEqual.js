@@ -32,55 +32,58 @@ function deepEqual(a, b) {
       return false;
     };
 
-    for (const i in a) {
-      if (!b[i]) {
+    for (const i1 in a) {
+      if (!b[i1]) {
         return false;
       } else {
-        if (typeof a[i] === 'object' && typeof b[i] === 'object') {
-          if (Object.keys(a[i]).length !== Object.keys(b[i]).length) {
+        if (typeof a[i1] === 'object' && typeof b[i1] === 'object') {
+          if (Object.keys(a[i1]).length !== Object.keys(b[i1]).length) {
             return false;
           };
 
-          for (const o in a[i]) {
-            if (!b[i][o]) {
+          for (const i2 in a[i1]) {
+            if (!b[i1][i2]) {
               return false;
             } else {
-              if (typeof a[i][o] === 'object' && typeof b[i][o] === 'object') {
-                if (Object.keys(a[i][o]).length
-                !== Object.keys(b[i][o]).length) {
+              if (typeof a[i1][i2] === 'object'
+               && typeof b[i1][i2] === 'object') {
+                if (Object.keys(a[i1][i2]).length
+                !== Object.keys(b[i1][i2]).length) {
                   return false;
                 };
 
-                for (const p in a[i][o]) {
-                  if (!b[i][o][p]) {
+                for (const i3 in a[i1][i2]) {
+                  if (!b[i1][i2][i3]) {
                     return false;
                   } else {
-                    if (typeof a[i][o][p] === 'object'
-                     && typeof b[i][o][p] === 'object') {
-                      if (Object.keys(a[i][o][p]).length
-                      !== Object.keys(b[i][o][p]).length) {
+                    if (typeof a[i1][i2][i3] === 'object'
+                     && typeof b[i1][i2][i3] === 'object') {
+                      if (Object.keys(a[i1][i2][i3]).length
+                      !== Object.keys(b[i1][i2][i3]).length) {
                         return false;
                       };
 
-                      for (const z in a[i][o][p]) {
-                        if (!b[i][o][p][z]) {
+                      for (const i4 in a[i1][i2][i3]) {
+                        if (!b[i1][i2][i3][i4]) {
                           return false;
                         } else {
-                          if (typeof a[i][o][p][z] === 'object'
-                           && typeof b[i][o][p][z] === 'object') {
-                            if (Object.keys(a[i][o][p][z]).length
-                            !== Object.keys(b[i][o][p][z]).length) {
+                          if (typeof a[i1][i2][i3][i4] === 'object'
+                           && typeof b[i1][i2][i3][i4] === 'object') {
+                            if (Object.keys(a[i1][i2][i3][i4]).length
+                            !== Object.keys(b[i1][i2][i3][i4]).length) {
                               return false;
                             };
 
-                            for (const x in a[i][o][p][z]) {
-                              if (!b[i][o][p][z][x]) {
+                            for (const i5 in a[i1][i2][i3][i4]) {
+                              if (!b[i1][i2][i3][i4][i5]) {
                                 return false;
                               } else {
-                                if (typeof a[i][o][p][z][x] === 'object'
-                                 && typeof b[i][o][p][z][x] === 'object') {
-                                  if (Object.keys(a[i][o][p][z][x]).length
-                                  !== Object.keys(b[i][o][p][z][x]).length) {
+                                if (typeof a[i1][i2][i3][i4][i5] === 'object'
+                                 && typeof b[i1][i2][i3][i4][i5] === 'object') {
+                                  if (Object.keys(a[i1][i2][i3][i4][i5])
+                                    .length
+                                  !== Object.keys(b[i1][i2][i3][i4][i5])
+                                    .length) {
                                     return false;
                                   };
                                 }
@@ -93,14 +96,14 @@ function deepEqual(a, b) {
                   }
                 }
               } else {
-                if (a[i][o] !== b[i][o]) {
+                if (a[i1][i2] !== b[i1][i2]) {
                   return false;
                 }
               }
             }
           }
         } else {
-          if (a[i] !== b[i]) {
+          if (a[i1] !== b[i1]) {
             return false;
           }
         }
