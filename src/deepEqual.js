@@ -23,25 +23,22 @@ function deepEqual(a, b) {
   if (a === b) {
     return true;
   }
-  else if ((typeof a == "object" && a != null) && (typeof b == "object" && b != null)) {
-    if (Object.keys(a).length != Object.keys(b).length) {
+
+  if ((typeof a === 'object' && a != null) && (typeof b === 'object' && b != null)) {
+    if (Object.keys(a).length !== Object.keys(b).length) {
       return false;
     }
 
-    for (let value in a) {
-      if (b.hasOwnProperty(value))
-      {
-        if (! deepEqual(a[value], b[value]))
-          return false;
-      }
-      else
+    for (const value in a) {
+      if (b.hasOwnProperty(value) && !deepEqual(a[value], b[value])) {
         return false;
+      }
     }
 
     return true;
   }
-  else
-    return false;
+
+  return false;
 }
 
 module.exports = deepEqual;
