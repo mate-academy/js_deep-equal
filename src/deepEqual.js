@@ -24,7 +24,8 @@ function deepEqual(a, b) {
     return true;
   }
 
-  if ((typeof a === 'object' && a != null) && (typeof b === 'object' && b != null)) {
+  if ((typeof a === 'object' && a !== null)
+  && (typeof b === 'object' && b !== null)) {
     if (Object.keys(a).length !== Object.keys(b).length) {
       return false;
     }
