@@ -20,7 +20,19 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  switch (true) {
+    case a === b:
+    case a === null && b === null:
+      return true;
+
+    case a === null || b === null:
+    case (typeof a !== 'object') || (typeof b !== 'object'):
+    case Object.keys(a).length !== Object.keys(b).length:
+      return false;
+
+    default:
+      return Object.keys(a).every(key => deepEqual(a[key], b[key]));
+  }
 }
 
 module.exports = deepEqual;
