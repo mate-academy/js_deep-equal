@@ -22,7 +22,6 @@
 function deepEqual(a, b) {
   switch (true) {
     case a === b:
-    case a === null && b === null:
       return true;
 
     case a === null || b === null:
