@@ -20,7 +20,32 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  if (a === b) {
+    return true;
+  } else if (a === null || b === null) {
+    return false;
+  }
+
+  if ((typeof (a) !== 'object' && typeof (b) !== 'object')
+   || (Object.keys(a).length !== Object.keys(b).length)) {
+    return false;
+  }
+
+  if (typeof (a) === 'object' && typeof (b) === 'object') {
+    for (const key of Object.keys(a)) {
+      if (!b.hasOwnProperty(key)) {
+        return false;
+      } else {
+        const recursiveCheck = deepEqual(a[key], b[key]);
+
+        if (!recursiveCheck) {
+          return false;
+        }
+      }
+    }
+  }
+
+  return true;
 }
 
 module.exports = deepEqual;
