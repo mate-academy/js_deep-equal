@@ -20,7 +20,7 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  if (a === null && b === null) {
+  if (a === b) {
     return true;
   }
 
