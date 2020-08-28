@@ -20,7 +20,36 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  // Different data types, no need to compare
+  if (typeof a !== typeof b) {
+    return false;
+  }
+
+  // Compare primitives and null
+  if ((typeof a !== 'object' && typeof b !== 'object')
+      || (a === null || b === null)) {
+    return a === b;
+  }
+
+  // Compare objects
+  if (typeof a === 'object' && typeof b === 'object') {
+    if (Object.keys(a).length !== Object.keys(b).length) {
+      return false;
+    }
+
+    // Compare objects with same number of keys
+    for (const key in a) {
+      if (!b.hasOwnProperty(key)) {
+        return false;
+      }
+
+      if (!deepEqual(a[key], b[key])) {
+        return false;
+      }
+    }
+
+    return true;
+  }
 }
 
 module.exports = deepEqual;
