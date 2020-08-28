@@ -19,8 +19,35 @@
  *
  * @return {boolean}
  */
+
 function deepEqual(a, b) {
-  // write code here
+  if (typeof a !== 'object' || typeof b !== 'object'
+    || a === null || b === null) {
+    return (a === b);
+  }
+
+  const comparing = function(objA, objB) {
+    const keysA = Object.keys(objA);
+    const keysB = Object.keys(objB);
+
+    if (keysA.length !== keysB.length) {
+      return false;
+    }
+
+    for (const key in objA) {
+      if (typeof objA[key] === 'object' && typeof objB[key] === 'object') {
+        if (!comparing(objA[key], objB[key])) {
+          return false;
+        }
+      } else if (objA[key] !== objB[key]) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+  return comparing(a, b);
 }
 
 module.exports = deepEqual;
