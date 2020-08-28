@@ -20,9 +20,11 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  if (a === null && b === null) {
+  if (a === b) {
     return true;
-  } else if ((a === null && b !== null) || (a !== null && b === null)) {
+  }
+
+  if (a === null || b === null) {
     return false;
   }
 
@@ -37,9 +39,7 @@ function deepEqual(a, b) {
   for (const key in a) {
     if (!b.hasOwnProperty(key)) {
       return false;
-    } else if (typeof (a[key]) !== 'object' && a[key] !== b[key]) {
-      return false;
-    } else if (typeof (a[key]) === 'object') {
+    } else {
       const result = deepEqual(a[key], b[key]);
 
       if (!result) {
