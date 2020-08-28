@@ -20,7 +20,25 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  if (a === null && b === null) {
+    return true;
+  }
+
+  if (a === null || b === null) {
+    return false;
+  }
+
+  if (typeof a === 'object' && typeof b === 'object') {
+    if (Object.keys(a).length === Object.keys(b).length) {
+      return Object.keys(a).every(key => deepEqual(a[key], b[key]));
+    }
+  }
+
+  if (a === b) {
+    return true;
+  }
+
+  return false;
 }
 
 module.exports = deepEqual;
