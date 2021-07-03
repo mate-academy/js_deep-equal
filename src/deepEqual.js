@@ -20,7 +20,36 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  if (typeof a !== typeof b) {
+    return false;
+  } else if (typeof a !== 'object') {
+    return a === b;
+  } else {
+    if (a === null && b === null) {
+      return true;
+    } else if (a === null || b === null) {
+      return false;
+    }
+
+    const aKeys = Object.keys(a).sort();
+    const bKeys = Object.keys(b).sort();
+    if (aKeys.length !== bKeys.length) {
+      return false;
+    }
+    aKeys.sort();
+    bKeys.sort();
+
+    for (let i = 0; i < aKeys.length; i++) {
+      if (aKeys[i] === bKeys[i]) {
+        if (!deepEqual(a[aKeys[i]], b[aKeys[i]])) {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }
+    return true;
+  }
 }
 
 module.exports = deepEqual;
