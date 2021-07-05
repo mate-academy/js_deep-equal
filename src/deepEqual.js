@@ -20,7 +20,61 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  let flag = false;
+
+  if (a === b) {
+    flag = true;
+  }
+
+  if (typeof(a) === 'object'
+  && typeof(b) === 'object'
+  && a !== null
+  && b !== null) {
+    for (const property in a) {
+      if (b.hasOwnProperty(property)) {
+        flag = deepEqual(a[property], b[property]);
+      }
+
+      if (!flag) {
+        return flag;
+      }
+    }
+
+    for (const property in b) {
+      if (!a.hasOwnProperty(property)) {
+        return false;
+      }
+    }
+  }
+
+  return flag;
+}
+
+/**
+ * Bonus function:
+ * Translates given object to a string
+ *
+ * @param {object} obj
+ *
+ * @return {string}
+ */
+
+function objToString(obj) {
+  let objString = '{ ';
+  for (const key in obj) {
+    objString += key + ': ';
+    if (typeof(obj[key]) === 'object') {
+      if (obj[key] === null) {
+        objString += 'null, ';
+      } else {
+        objString += objToString(obj[key]);
+      }
+    } else {
+      objString += obj[key] + ', ';
+    }
+  }
+  objString += '}';
+  return objString;
 }
 
 module.exports = deepEqual;
