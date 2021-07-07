@@ -20,7 +20,23 @@
  * @return {boolean}
  */
 function deepEqual(a, b) {
-  // write code here
+  if ((typeof a !== 'object' || typeof b !== 'object' || a === null || b == null)) {
+    return a === b;
+  }
+
+  let objectOneLength = Object.keys(a).length;
+  let objectTwoLength = Object.keys(b).length;
+
+  if (objectOneLength !== objectTwoLength) {
+    return false;
+  }
+  for (let key in a) {
+    if (!(key in b) || !deepEqual(a[key], b[key])) {
+      return false;
+    }
+  }
+  // when length equalizer stands here , i try to reduce frequency of comparing
+  return true;
 }
 
 module.exports = deepEqual;
